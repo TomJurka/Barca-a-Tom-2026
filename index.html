@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
+    <meta property="og:title" content="Svatba Báry a Toma — 20. 6. 2026">
+    <meta property="og:description" content="Zveme vás na naši svatbu! 20. června 2026, Mendelův skleník, Brno.">
+    <meta property="og:image" content="images/gallery/01.webp">
+    <meta property="og:type" content="website">
     <title>Svatba Báry a Toma</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="images/gallery/thumbs/01.webp">
+    <link rel="preload" as="image" href="images/gallery/thumbs/02.webp">
+    <link rel="preload" as="image" href="images/gallery/thumbs/03.webp">
     <style>
         :root {
             --blue: #7aafe0;
@@ -49,23 +56,93 @@
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--card-border);
             padding: 12px 20px;
+        }
+        .nav-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(45, 65, 100, 0.22);
+            backdrop-filter: blur(2px);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.28s ease, visibility 0.28s ease;
+        }
+        body.nav-menu-open .nav-backdrop {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        body.nav-menu-open {
+            overflow: hidden;
+        }
+        .nav-toolbar {
+            display: none;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+        .nav-menu-btn {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 22px;
+            min-height: 48px;
+            border: 1px solid var(--card-border);
+            border-radius: 999px;
+            background: linear-gradient(145deg, #fff 0%, var(--accent-bg) 100%);
+            box-shadow: 0 4px 16px var(--card-shadow);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: var(--heading);
+            transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+        }
+        .nav-menu-btn:hover {
+            box-shadow: 0 6px 20px rgba(74, 143, 212, 0.18);
+            transform: scale(1.02);
+        }
+        .nav-menu-btn:active {
+            transform: scale(0.98);
+        }
+        .nav-menu-btn.open {
+            background: linear-gradient(145deg, var(--accent-bg) 0%, #fff 100%);
+            color: var(--purple-deep);
+        }
+        .nav-menu-btn-icon {
+            font-size: 1.2em;
+            line-height: 1;
+            display: inline-block;
+        }
+        .nav-menu-btn-label {
+            line-height: 1;
+        }
+        .nav-links {
             display: flex;
             justify-content: center;
             gap: 8px;
             flex-wrap: wrap;
         }
-        nav a {
+        .nav-links a {
             color: var(--heading);
             text-decoration: none;
             font-size: 0.85em;
-            font-weight: 400;
-            padding: 6px 14px;
-            border-radius: 20px;
-            transition: background 0.2s, color 0.2s;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            background: transparent;
+            transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
         }
-        nav a:hover {
+        .nav-links a:hover {
             background: var(--accent-bg);
             color: var(--purple-deep);
+            border-color: rgba(74, 143, 212, 0.15);
+            box-shadow: 0 2px 10px rgba(74, 143, 212, 0.1);
         }
 
         /* Header */
@@ -274,6 +351,14 @@
             color: var(--purple-deep);
             font-weight: 500;
             font-size: 1.05em;
+        }
+        .gallery-note {
+            margin: 28px auto 4px;
+            max-width: 38em;
+            text-align: center;
+            color: var(--text);
+            font-size: 0.95em;
+            line-height: 1.75;
         }
         .gallery-nav {
             position: absolute;
@@ -497,6 +582,50 @@
         .lightbox-arrow.prev { left: 16px; }
         .lightbox-arrow.next { right: 16px; }
 
+        /* RSVP compact */
+        .rsvp-section {
+            padding: 32px 28px;
+        }
+        .rsvp-section h2 {
+            font-size: 1.4em;
+            margin-bottom: 12px;
+        }
+        .rsvp-section p {
+            margin: 0 0 4px;
+        }
+        .rsvp-btn {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 11px 28px;
+            background: white;
+            color: #6b5b95;
+            font-weight: 500;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.95em;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .rsvp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+        }
+        .text-center {
+            text-align: center;
+        }
+        .palette-intro {
+            text-align: center;
+            margin-top: 24px;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+        .program-item-half {
+            flex: 0.5;
+        }
+        .mhd-note {
+            color: var(--text-light);
+        }
+
         /* Scroll animations */
         .fade-in {
             opacity: 0;
@@ -511,22 +640,65 @@
         /* Responsive */
         @media (max-width: 600px) {
             nav {
-                gap: 4px;
-                padding: 10px 12px;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                justify-content: flex-start;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
+                padding: 12px 16px 14px;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
             }
-            nav::-webkit-scrollbar {
-                display: none;
+            .nav-toolbar {
+                display: flex;
             }
-            nav a {
-                font-size: 0.78em;
-                padding: 5px 10px;
-                white-space: nowrap;
-                flex-shrink: 0;
+            .nav-menu-btn {
+                display: inline-flex;
+            }
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                margin-top: 0;
+                padding: 0 8px;
+                width: 100%;
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+                box-sizing: border-box;
+                max-height: 0;
+                overflow: hidden;
+                visibility: hidden;
+                pointer-events: none;
+                /* Bez animace výšky — postupné „nasouvání“ vypadá špatně */
+                transition: none;
+            }
+            .nav-links.open {
+                margin-top: 14px;
+                max-height: 100vh;
+                visibility: visible;
+                pointer-events: auto;
+                padding-bottom: 6px;
+                overflow: visible;
+            }
+            .nav-links a {
+                box-sizing: border-box;
+                align-self: center;
+                width: min(280px, 100%);
+                text-align: center;
+                font-size: 0.95em;
+                padding: 12px 20px;
+                border-radius: 14px;
+                background: linear-gradient(180deg, #fff 0%, var(--accent-bg) 100%);
+                border: 1px solid rgba(74, 143, 212, 0.18);
+                box-shadow: 0 2px 12px rgba(74, 143, 212, 0.08);
+                transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+            }
+            .nav-links a:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 6px 18px rgba(106, 104, 168, 0.15);
+            }
+            @media (prefers-reduced-motion: reduce) {
+                .nav-links a {
+                    transition: none !important;
+                }
             }
             header {
                 padding: 70px 20px 60px;
@@ -592,10 +764,29 @@
                 max-width: 96%;
                 border-radius: 8px;
             }
+            .lightbox-arrow {
+                font-size: 2.2em;
+                padding: 12px;
+                opacity: 0.8;
+            }
+            .lightbox-arrow.prev { left: 4px; }
+            .lightbox-arrow.next { right: 4px; }
             .lightbox-close {
                 top: 12px;
                 right: 16px;
                 font-size: 1.6em;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .nav-links {
+                transition: none;
+            }
+            .nav-backdrop {
+                transition: none;
+            }
+            .nav-menu-btn {
+                transition: none;
             }
         }
     </style>
@@ -611,15 +802,24 @@
         </div>
     </header>
 
-    <nav>
-        <a href="#o-nas">O nás</a>
-        <a href="#datum">Kdy a kde</a>
-        <a href="#program">Program</a>
-        <a href="#dresscode">Dress code</a>
-        <a href="#galerie">Fotky</a>
-        <a href="#dary">Dary</a>
-        <a href="#doprava">Doprava</a>
-        <a href="#svedci">Svědci</a>
+    <div id="nav-backdrop" class="nav-backdrop" aria-hidden="true"></div>
+    <nav id="main-nav">
+        <div class="nav-toolbar">
+            <button type="button" class="nav-menu-btn" id="nav-menu-btn" aria-expanded="false" aria-controls="nav-links" aria-label="Otevřít menu">
+                <span class="nav-menu-btn-icon" aria-hidden="true">🚀</span>
+                <span class="nav-menu-btn-label" id="nav-menu-btn-label">Menu</span>
+            </button>
+        </div>
+        <div class="nav-links" id="nav-links">
+            <a href="#o-nas">O nás</a>
+            <a href="#datum">Kdy a kde</a>
+            <a href="#program">Program</a>
+            <a href="#dresscode">Dress code</a>
+            <a href="#galerie">Fotky</a>
+            <a href="#dary">Dary</a>
+            <a href="#doprava">Doprava</a>
+            <a href="#svedci">Svědci</a>
+        </div>
     </nav>
 
     <div class="container">
@@ -651,11 +851,11 @@
             </div>
         </section>
 
-        <section class="rsvp-section fade-in" id="rsvp" style="padding:32px 28px;">
-            <h2 style="font-size:1.4em; margin-bottom:12px;">RSVP</h2>
-            <p style="margin:0 0 4px;">Prosíme o potvrzení účasti do 20. května 2026.</p>
-            <p style="margin:0;">Vyplňte nám krátký formulář — zabere to minutku.</p>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSflb5icu_Z6nXJI2GXvZn0-Oqd2Jh8Aiblpslhy0Rw4f0qZ-w/viewform?usp=dialog" target="_blank" style="display:inline-block; margin-top:14px; padding:11px 28px; background:white; color:#6b5b95; font-weight:500; border-radius:30px; text-decoration:none; font-size:0.95em; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">Vyplnit formulář</a>
+        <section class="rsvp-section fade-in" id="rsvp">
+            <h2>RSVP</h2>
+            <p>Prosíme o potvrzení účasti do 20. května 2026.</p>
+            <p>Vyplňte nám krátký formulář — zabere to minutku.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSflb5icu_Z6nXJI2GXvZn0-Oqd2Jh8Aiblpslhy0Rw4f0qZ-w/viewform?usp=dialog" target="_blank" class="rsvp-btn">Vyplnit formulář</a>
         </section>
 
         <section class="card fade-in" id="program">
@@ -692,17 +892,17 @@
                 </div>
                 <div class="program-arrow-down">↓</div>
                 <div class="program-row reverse">
-                    <div class="program-item" style="flex:0.5;"><span class="program-icon">🌙</span><div><strong>02:00</strong><span>Konec?</span></div></div>
+                    <div class="program-item program-item-half"><span class="program-icon">🌙</span><div><strong>02:00</strong><span>Konec?</span></div></div>
                 </div>
             </div>
         </section>
 
         <section class="card fade-in" id="dresscode">
             <h2>Dress code</h2>
-            <p style="text-align:center;">Oblečte se slavnostně podle vašich možností.</p>
+            <p class="text-center">Oblečte se slavnostně podle vašich možností.</p>
             <div class="dresscode-hint">
                 <strong>Tip:</strong> Pánové oblek, sako, nebo aspoň košile, dámy šaty nebo elegantní kombinace. Boty hlavně pohodlné. Ne nutně nejspolečenštější. Ponožky v sandálech už jsou extrém.
-            <p style="text-align:center; margin-top:24px; margin-bottom:8px; font-weight:400;">Naše barevná paleta pro inspiraci:</p>
+            <p class="palette-intro">Naše barevná paleta pro inspiraci:</p>
             <div class="color-palette">
                 <div class="color-swatch" style="background:#94b8e0;" data-name="modrá"></div>
                 <div class="color-swatch" style="background:#b0a0d4;" data-name="fialová"></div>
@@ -713,7 +913,7 @@
             </div>
         </section>
 
-        <section class="fade-in" id="galerie">
+        <section class="card fade-in" id="galerie">
             <h2>Jak jdeme časem</h2>
             <div class="scroll-gallery-wrap">
             <button class="gallery-nav left" id="gallery-prev">&#8249;</button>
@@ -742,6 +942,7 @@
                 <div class="scroll-gallery-item"><img src="images/gallery/thumbs/21.webp" data-full="images/gallery/21.webp" alt="Tesla Santa Fe" loading="lazy"><div class="caption"><strong>10. 3. 2026</strong>Tesla Santa Fe</div></div>
             </div>
             </div>
+            <p class="gallery-note">Pokud nás máte taky zachyceny, jak jdem časem, a máte byť jen malou pochybnost, že ty fotky nemáme, prosíme, abyste nám je poskytli.</p>
         </section>
 
         <section class="card fade-in gift-section" id="dary">
@@ -758,7 +959,7 @@
                 <div class="info-item">
                     <strong>MHD</strong>
                     Tram 1, 2, 4, 5, 6 · Trolejbus 25, 26, 37 · Autobus 52, 84
-                    <br><small style="color:var(--text-light);">Zastávka: Mendlovo náměstí</small>
+                    <br><small class="mhd-note">Zastávka: Mendlovo náměstí</small>
                 </div>
                 <div class="info-item">
                     <strong>Autem</strong>
@@ -800,6 +1001,52 @@
     </div>
 
     <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('nav-menu-btn');
+        const menuBtnLabel = document.getElementById('nav-menu-btn-label');
+        const navLinks = document.getElementById('nav-links');
+        const navBackdrop = document.getElementById('nav-backdrop');
+
+        function closeMenu() {
+            navLinks.classList.remove('open');
+            menuBtn.classList.remove('open');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            menuBtn.setAttribute('aria-label', 'Otevřít menu');
+            if (menuBtnLabel) menuBtnLabel.textContent = 'Menu';
+            document.body.classList.remove('nav-menu-open');
+            navBackdrop.setAttribute('aria-hidden', 'true');
+        }
+
+        function openMenu() {
+            navLinks.classList.add('open');
+            menuBtn.classList.add('open');
+            menuBtn.setAttribute('aria-expanded', 'true');
+            menuBtn.setAttribute('aria-label', 'Zavřít menu');
+            if (menuBtnLabel) menuBtnLabel.textContent = 'Zavřít';
+            document.body.classList.add('nav-menu-open');
+            navBackdrop.setAttribute('aria-hidden', 'false');
+        }
+
+        function toggleMenu() {
+            const isOpen = navLinks.classList.contains('open');
+            if (isOpen) closeMenu();
+            else openMenu();
+        }
+
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
+        navBackdrop.addEventListener('click', closeMenu);
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Escape') return;
+            if (document.getElementById('lightbox').classList.contains('active')) return;
+            if (document.body.classList.contains('nav-menu-open')) closeMenu();
+        });
+
         // Countdown
         function updateCountdown() {
             const wedding = new Date('2026-06-20T12:00:00');
@@ -881,6 +1128,18 @@
             if (e.key === 'ArrowRight') nextPhoto();
             else if (e.key === 'ArrowLeft') prevPhoto();
             else if (e.key === 'Escape') closeLightbox();
+        });
+
+        let touchStartX = 0;
+        lightbox.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        lightbox.addEventListener('touchend', (e) => {
+            const diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) nextPhoto();
+                else prevPhoto();
+            }
         });
 
         // Scroll fade-in animations
