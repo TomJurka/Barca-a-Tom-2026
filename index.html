@@ -539,16 +539,24 @@
             .info-grid {
                 grid-template-columns: 1fr;
             }
-            .program-row,
-            .program-row.reverse {
-                flex-direction: column;
-                gap: 4px;
+            .program-item {
+                padding: 10px 12px;
+            }
+            .program-icon {
+                font-size: 1.2em;
+            }
+            .program-item strong {
+                font-size: 0.8em;
+            }
+            .program-item span:not(.program-icon) {
+                font-size: 0.8em;
             }
             .program-arrow-h {
-                transform: rotate(90deg);
+                font-size: 1em;
             }
             .program-arrow-down {
-                justify-content: center;
+                font-size: 1em;
+                padding: 2px 16px;
             }
             .scroll-gallery-item img {
                 height: 240px;
