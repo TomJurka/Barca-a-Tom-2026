@@ -5,256 +5,876 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>Svatba Báry a Toma</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --blue: #7aafe0;
+            --blue-deep: #4a8fd4;
+            --blue-light: #b8d4f0;
+            --purple: #9a8fc8;
+            --purple-deep: #7068a8;
+            --pink: #e0a8be;
+            --pink-deep: #cc8098;
+            --bg: #f6faff;
+            --card-bg: #ffffff;
+            --card-border: rgba(74,143,212,0.12);
+            --card-shadow: rgba(74,143,212,0.08);
+            --text: #2c3e5a;
+            --text-light: #7088a8;
+            --heading: #3d6098;
+            --accent-bg: #edf4fc;
+        }
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            line-height: 1.8;
             margin: 0;
             padding: 0;
-            background-color: #f0f8ff; /* Světle modrá pozadí */
-            color: #333;
+            background-color: var(--bg);
+            color: var(--text);
         }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(250,248,255,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: var(--heading);
+            text-decoration: none;
+            font-size: 0.85em;
+            font-weight: 400;
+            padding: 6px 14px;
+            border-radius: 20px;
+            transition: background 0.2s, color 0.2s;
+        }
+        nav a:hover {
+            background: var(--accent-bg);
+            color: var(--purple-deep);
+        }
+
+        /* Header */
         header {
-            background: linear-gradient(to right, #0066cc, #4da6ff); /* Tmavě modrá do světle modré */
+            background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 50%, var(--pink) 100%);
             color: white;
             text-align: center;
-            padding: 50px 20px;
+            padding: 100px 20px 80px;
+            position: relative;
+            overflow: hidden;
         }
-        h1 {
-            font-size: 3em;
-            margin: 0;
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.15) 0%, transparent 60%);
         }
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2em, 6vw, 4em);
+            font-weight: 700;
+            margin: 0 0 12px;
+            letter-spacing: -0.02em;
+            position: relative;
+        }
+        header > p {
+            font-size: 1.15em;
+            opacity: 0.9;
+            font-weight: 300;
+            position: relative;
+            margin: 0 0 8px;
+        }
+        .countdown {
+            position: relative;
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .countdown-item {
+            text-align: center;
+        }
+        .countdown-item .number {
+            display: block;
+            font-size: 2.4em;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+        .countdown-item .label {
+            font-size: 0.8em;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Main content */
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 24px;
         }
         section {
-            background: white;
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,102,204,0.1); /* Modrý stín */
+            margin: 48px 0;
+            padding: 0;
+            background: none;
+            border-radius: 0;
+            box-shadow: none;
+            scroll-margin-top: 60px;
+        }
+        section.card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px var(--card-shadow);
+            border: 1px solid var(--card-border);
         }
         h2 {
-            color: #0066cc; /* Tmavě modrá pro nadpisy */
-        }
-        .date {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #4da6ff; /* Světle modrá pro datum */
-        }
-        footer {
+            font-family: 'Playfair Display', serif;
+            color: var(--heading);
+            font-size: 1.8em;
+            font-weight: 700;
+            margin: 0 0 20px;
+            letter-spacing: -0.01em;
             text-align: center;
-            padding: 20px;
-            background: #0066cc;
-            color: white;
         }
-        .gallery {
+
+        /* Info grid */
+        .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
         }
-        .gallery figure {
-            margin: 0;
+        .info-item {
             text-align: center;
+            padding: 24px 16px;
+            background: var(--accent-bg);
+            border-radius: 12px;
         }
-        .gallery img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
+        .info-item strong {
+            display: block;
+            font-weight: 500;
+            color: var(--purple-deep);
+            margin-bottom: 4px;
+        }
+
+        /* Program Snake */
+        .program-snake {
+            margin-top: 20px;
+        }
+        .program-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .program-row.reverse {
+            flex-direction: row-reverse;
+        }
+        .program-item {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 16px;
+            background: var(--accent-bg);
+            border-radius: 12px;
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        .gallery img:hover {
-            transform: scale(1.03);
-            box-shadow: 0 4px 20px rgba(0,102,204,0.25);
+        .program-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--card-shadow);
         }
-        .gallery figcaption {
+        .program-icon {
+            font-size: 1.4em;
+            flex-shrink: 0;
+        }
+        .program-item strong {
+            display: block;
+            color: var(--blue-deep);
+            font-weight: 500;
             font-size: 0.85em;
-            color: #666;
-            margin-top: 6px;
         }
-        .witnesses {
+        .program-item span:not(.program-icon) {
+            font-size: 0.9em;
+        }
+        .program-arrow-h {
+            color: var(--purple);
+            font-size: 1.3em;
+            flex-shrink: 0;
+        }
+        .program-arrow-down {
             display: flex;
-            gap: 40px;
+            justify-content: flex-end;
+            padding: 4px 24px;
+            color: var(--purple);
+            font-size: 1.3em;
+        }
+        .program-row.reverse + .program-arrow-down {
+            justify-content: flex-start;
+        }
+
+        /* Scroll Strip Gallery */
+        .scroll-gallery-wrap {
+            position: relative;
+        }
+        .scroll-gallery {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 16px;
+            padding: 16px 0 24px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .scroll-gallery::-webkit-scrollbar {
+            display: none;
+        }
+        .scroll-gallery-item {
+            flex: 0 0 calc(33.333% - 11px);
+            scroll-snap-align: start;
+            text-align: center;
+        }
+        .scroll-gallery-item img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .scroll-gallery-item img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(140,120,180,0.2);
+        }
+        .scroll-gallery-item .caption {
+            margin-top: 10px;
+            font-size: 0.82em;
+            color: var(--text-light);
+        }
+        .scroll-gallery-item .caption strong {
+            display: block;
+            color: var(--purple-deep);
+            font-weight: 500;
+            font-size: 1.05em;
+        }
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-70%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+            cursor: pointer;
+            font-size: 1.2em;
+            color: var(--purple-deep);
+            display: flex;
+            align-items: center;
             justify-content: center;
+            z-index: 5;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .gallery-nav:hover {
+            transform: translateY(-70%) scale(1.1);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+        }
+        .gallery-nav.left { left: -12px; }
+        .gallery-nav.right { right: -12px; }
+        @media (max-width: 700px) {
+            .scroll-gallery-item {
+                flex: 0 0 85%;
+            }
+            .scroll-gallery-item img {
+                height: 240px;
+            }
+            .gallery-nav { display: none; }
+        }
+
+        /* Gift section */
+        .gift-section {
+            text-align: center;
+        }
+        .gift-section .qr-wrap {
+            margin-top: 24px;
+        }
+        .gift-section .qr-wrap img {
+            max-width: 180px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(59,130,246,0.1);
+        }
+
+        /* Dress code */
+        .dresscode-hint {
+            text-align: center;
+            margin-top: 16px;
+            padding: 20px;
+            background: var(--accent-bg);
+            border-radius: 12px;
+            font-size: 0.95em;
+        }
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
             flex-wrap: wrap;
             margin-top: 20px;
         }
+        .color-swatch {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .color-swatch::after {
+            content: attr(data-name);
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7em;
+            color: var(--text-light);
+            white-space: nowrap;
+        }
+
+        /* Map */
+        .map-wrap {
+            margin-top: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px var(--card-shadow);
+        }
+        .map-wrap iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+
+        /* Witnesses */
+        .witnesses {
+            display: flex;
+            gap: 48px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
         .witness {
             text-align: center;
-            max-width: 200px;
         }
         .witness-photo {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             object-fit: cover;
-            background: #e0e0e0;
+            background: linear-gradient(135deg, var(--accent-bg), #f8f0f4);
             display: block;
-            margin: 0 auto 12px;
+            margin: 0 auto 14px;
+            border: 3px solid rgba(176,160,212,0.25);
         }
         .witness h3 {
             margin: 0 0 6px;
-            color: #0066cc;
-            font-size: 1.1em;
+            font-family: 'Playfair Display', serif;
+            color: var(--heading);
+            font-size: 1.05em;
+            font-weight: 700;
         }
         .witness p {
-            margin: 4px 0;
-            font-size: 0.9em;
+            margin: 3px 0;
+            font-size: 0.85em;
         }
         .witness a {
-            color: #4da6ff;
+            color: var(--purple-deep);
             text-decoration: none;
         }
         .witness a:hover {
             text-decoration: underline;
         }
+
+        /* RSVP */
+        .rsvp-section {
+            text-align: center;
+            background: linear-gradient(135deg, var(--purple-deep), var(--pink));
+            color: white;
+            padding: 48px 40px;
+            border-radius: 16px;
+        }
+        .rsvp-section h2 {
+            color: white;
+        }
+        .rsvp-section p {
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+            font-size: 0.9em;
+        }
+
+        /* Lightbox */
         .lightbox {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.92);
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+            backdrop-filter: blur(4px);
         }
         .lightbox.active {
             display: flex;
         }
         .lightbox img {
-            max-width: 90%;
-            max-height: 90vh;
-            border-radius: 8px;
+            max-width: 88%;
+            max-height: 75vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .lightbox-caption {
+            color: white;
+            text-align: center;
+            margin-top: 16px;
+            font-size: 1em;
+            opacity: 0.9;
+        }
+        .lightbox-caption strong {
+            display: block;
+            font-size: 1.1em;
+            margin-bottom: 4px;
         }
         .lightbox-close {
             position: absolute;
-            top: 20px; right: 30px;
+            top: 24px; right: 32px;
+            color: white;
+            font-size: 2em;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .lightbox-close:hover {
+            opacity: 1;
+        }
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
             color: white;
             font-size: 2.5em;
             cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            padding: 16px;
+            user-select: none;
+        }
+        .lightbox-arrow:hover {
+            opacity: 1;
+        }
+        .lightbox-arrow.prev { left: 16px; }
+        .lightbox-arrow.next { right: 16px; }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            nav {
+                gap: 4px;
+                padding: 10px 12px;
+            }
+            nav a {
+                font-size: 0.78em;
+                padding: 5px 10px;
+            }
+            header {
+                padding: 70px 20px 60px;
+            }
+            header h1 {
+                font-size: 1.8em;
+            }
+            .countdown {
+                gap: 12px;
+            }
+            .countdown-item .number {
+                font-size: 1.8em;
+            }
+            section.card {
+                padding: 28px 20px;
+            }
+            h2 {
+                font-size: 1.4em;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .program-row,
+            .program-row.reverse {
+                flex-direction: column;
+                gap: 4px;
+            }
+            .program-arrow-h {
+                transform: rotate(90deg);
+            }
+            .program-arrow-down {
+                justify-content: center;
+            }
+            .scroll-gallery-item img {
+                height: 240px;
+            }
+            .color-palette {
+                gap: 8px;
+            }
+            .color-swatch {
+                width: 38px;
+                height: 38px;
+            }
+            .witnesses {
+                gap: 32px;
+            }
+            .rsvp-section {
+                padding: 32px 16px;
+                border-radius: 12px;
+            }
+            .map-wrap iframe {
+                height: 220px;
+            }
+            .lightbox img {
+                max-width: 96%;
+                border-radius: 8px;
+            }
+            .lightbox-close {
+                top: 12px;
+                right: 16px;
+                font-size: 1.6em;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Svatba Báry a Toma 2026</h1>
-        <p>Připravujeme se na den plný lásky a radosti</p>
+        <h1>Bárča & Tom jsou připraveni k odletu</h1>
+        <div class="countdown" id="countdown">
+            <div class="countdown-item"><span class="number" id="cd-days">--</span><span class="label">dní</span></div>
+            <div class="countdown-item"><span class="number" id="cd-hours">--</span><span class="label">hodin</span></div>
+            <div class="countdown-item"><span class="number" id="cd-mins">--</span><span class="label">minut</span></div>
+            <div class="countdown-item"><span class="number" id="cd-secs">--</span><span class="label">sekund</span></div>
+        </div>
     </header>
-    
+
+    <nav>
+        <a href="#o-nas">O nás</a>
+        <a href="#datum">Kdy a kde</a>
+        <a href="#program">Program</a>
+        <a href="#dresscode">Dress code</a>
+        <a href="#galerie">Fotky</a>
+        <a href="#dary">Dary</a>
+        <a href="#doprava">Doprava</a>
+        <a href="#svedci">Svědci</a>
+    </nav>
+
     <div class="container">
-        <section id="o-nas">
-            <h2>Proč?</h2>
-            <p>Barča a Tom se konečně budou brát! Však už jsou taky zasnoubení od 21.2.2021</p>
+        <section class="card fade-in" id="o-nas">
+            <h2>Co je k tomu vedlo?</h2>
+            <p>Barča a Tom se konečně budou brát! Však už jsou taky zasnoubení od 21.2.2021. Znají se ale už mnohem déle a celkově vznikl konzensus, že spolu chodí od 20.3.2013. Svatba je tedy přesne po 13 letech a 3 měsících!</p>
+            <p>Za ta léta jsem si toho spolu hodně prožili. Užíváme si společné zájmy, kterým vévodí cestování, hraní deskovek, koukání na filmy a seriály a v neposlední řadě pití piva (to se dá dělat u všech těch činností). Samozřejmě se někdy neshodneme,
+                 ale už se tak dobře známe, že vše vždy vyřešíme. </p>
         </section>
-        
-        <section id="datum">
-            <h2>Datum a místo</h2>
-            <p class="date">Datum: 20. června 2026</p>
-            <p>Místo: Mendelův skleník na Mendelově náměstí</p>
-            <p>Obřad začne v 12:00 hodin</p>
-        </section>
-        
-        <section id="program">
-            <h2>Program svatby</h2>
-            <ul>
-                <li>12:00 - Obřad</li>
-                <li>15:30 - Koktejl a foto</li>
-                <li>17:00 - Večeře</li>
-                <li>20:00 - Tanec a zábava</li>
-            </ul>
-        </section>
-        
-        <section id="galerie">
-            <h2>Jak jdeme časem</h2>
-            <div class="gallery">
-                <figure><img src="images/gallery/thumbs/01.webp" data-full="images/gallery/01.webp" alt="29. 3. 2013" loading="lazy"><figcaption>29. 3. 2013</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/02.webp" data-full="images/gallery/02.webp" alt="17. 4. 2013" loading="lazy"><figcaption>17. 4. 2013</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/03.webp" data-full="images/gallery/03.webp" alt="27. 1. 2014" loading="lazy"><figcaption>27. 1. 2014</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/04.webp" data-full="images/gallery/04.webp" alt="1. 2. 2017" loading="lazy"><figcaption>1. 2. 2017</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/05.webp" data-full="images/gallery/05.webp" alt="18. 9. 2019" loading="lazy"><figcaption>18. 9. 2019</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/06.webp" data-full="images/gallery/06.webp" alt="4. 7. 2021" loading="lazy"><figcaption>4. 7. 2021</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/07.webp" data-full="images/gallery/07.webp" alt="11. 10. 2021" loading="lazy"><figcaption>11. 10. 2021</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/08.webp" data-full="images/gallery/08.webp" alt="20. 11. 2021" loading="lazy"><figcaption>20. 11. 2021</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/09.webp" data-full="images/gallery/09.webp" alt="26. 2. 2022" loading="lazy"><figcaption>26. 2. 2022</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/10.webp" data-full="images/gallery/10.webp" alt="4. 3. 2022" loading="lazy"><figcaption>4. 3. 2022</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/11.webp" data-full="images/gallery/11.webp" alt="9. 3. 2022" loading="lazy"><figcaption>9. 3. 2022</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/12.webp" data-full="images/gallery/12.webp" alt="15. 6. 2022" loading="lazy"><figcaption>15. 6. 2022</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/13.webp" data-full="images/gallery/13.webp" alt="30. 7. 2022" loading="lazy"><figcaption>30. 7. 2022</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/14.webp" data-full="images/gallery/14.webp" alt="9. 10. 2022" loading="lazy"><figcaption>9. 10. 2022</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/15.webp" data-full="images/gallery/15.webp" alt="13. 9. 2023" loading="lazy"><figcaption>13. 9. 2023</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/16.webp" data-full="images/gallery/16.webp" alt="2. 7. 2024" loading="lazy"><figcaption>2. 7. 2024</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/17.webp" data-full="images/gallery/17.webp" alt="12. 7. 2025" loading="lazy"><figcaption>12. 7. 2025</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/18.webp" data-full="images/gallery/18.webp" alt="31. 8. 2025" loading="lazy"><figcaption>31. 8. 2025</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/19.webp" data-full="images/gallery/19.webp" alt="16. 11. 2025" loading="lazy"><figcaption>16. 11. 2025</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/20.webp" data-full="images/gallery/20.webp" alt="3. 3. 2026" loading="lazy"><figcaption>3. 3. 2026</figcaption></figure>
-                <figure><img src="images/gallery/thumbs/21.webp" data-full="images/gallery/21.webp" alt="10. 3. 2026" loading="lazy"><figcaption>10. 3. 2026</figcaption></figure>
+
+        <section class="card fade-in" id="datum">
+            <h2>Kdy a kde</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Datum</strong>
+                    20. června 2026
+                </div>
+                <div class="info-item">
+                    <strong>Místo</strong>
+                    Mendelův skleník, Brno-město
+                </div>
+                <div class="info-item">
+                    <strong>Začátek</strong>
+                    12:00
+                </div>
+            </div>
+            <div class="map-wrap">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d800!2d16.59345632421695!3d49.19106392269466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1scs!2scz!4v1" allowfullscreen loading="lazy"></iframe>
             </div>
         </section>
 
-        <section id="dary">
+        <section class="rsvp-section fade-in" id="rsvp" style="padding:32px 28px;">
+            <h2 style="font-size:1.4em; margin-bottom:12px;">RSVP</h2>
+            <p style="margin:0 0 4px;">Prosíme o potvrzení účasti do 20. května 2026.</p>
+            <p style="margin:0;">Vyplňte nám krátký formulář — zabere to minutku.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSflb5icu_Z6nXJI2GXvZn0-Oqd2Jh8Aiblpslhy0Rw4f0qZ-w/viewform?usp=dialog" target="_blank" style="display:inline-block; margin-top:14px; padding:11px 28px; background:white; color:#6b5b95; font-weight:500; border-radius:30px; text-decoration:none; font-size:0.95em; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">Vyplnit formulář</a>
+        </section>
+
+        <section class="card fade-in" id="program">
+            <h2>Program</h2>
+            <div class="program-snake">
+                <div class="program-row">
+                    <div class="program-item"><span class="program-icon">👋</span><div><strong>11:00</strong><span>Příjezd hostů</span></div></div>
+                    <span class="program-arrow-h">→</span>
+                    <div class="program-item"><span class="program-icon">💍</span><div><strong>12:00</strong><span>Obřad</span></div></div>
+                </div>
+                <div class="program-arrow-down">↓</div>
+                <div class="program-row reverse">
+                    <div class="program-item"><span class="program-icon">🍽️</span><div><strong>13:00</strong><span>Oběd</span></div></div>
+                    <span class="program-arrow-h">→</span>
+                    <div class="program-item"><span class="program-icon">💃</span><div><strong>14:00</strong><span>První tanec</span></div></div>
+                </div>
+                <div class="program-arrow-down">↓</div>
+                <div class="program-row">
+                    <div class="program-item"><span class="program-icon">🎂</span><div><strong>14:45</strong><span>Krájení dortu</span></div></div>
+                    <span class="program-arrow-h">→</span>
+                    <div class="program-item"><span class="program-icon">🎲</span><div><strong>16:00</strong><span>Svatební hry</span></div></div>
+                </div>
+                <div class="program-arrow-down">↓</div>
+                <div class="program-row reverse">
+                    <div class="program-item"><span class="program-icon">🍷</span><div><strong>19:00</strong><span>Večerní raut</span></div></div>
+                    <span class="program-arrow-h">→</span>
+                    <div class="program-item"><span class="program-icon">🎲</span><div><strong>20:00</strong><span>Svatební hry</span></div></div>
+                </div>
+                <div class="program-arrow-down">↓</div>
+                <div class="program-row">
+                    <div class="program-item"><span class="program-icon">🪩</span><div><strong>21:00</strong><span>Paaarty</span></div></div>
+                    <span class="program-arrow-h">→</span>
+                    <div class="program-item"><span class="program-icon">✨</span><div><strong>23:00</strong><span>Překvápko</span></div></div>
+                </div>
+                <div class="program-arrow-down">↓</div>
+                <div class="program-row reverse">
+                    <div class="program-item" style="flex:0.5;"><span class="program-icon">🌙</span><div><strong>02:00</strong><span>Konec?</span></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card fade-in" id="dresscode">
+            <h2>Dress code</h2>
+            <p style="text-align:center;">Oblečte se slavnostně podle vašich možností.</p>
+            <div class="dresscode-hint">
+                <strong>Tip:</strong> Pánové oblek, sako, nebo aspoň košile, dámy šaty nebo elegantní kombinace. Boty hlavně pohodlné. Ne nutně nejspolečenštější. Ponožky v sandálech už jsou extrém.
+            <p style="text-align:center; margin-top:24px; margin-bottom:8px; font-weight:400;">Naše barevná paleta pro inspiraci:</p>
+            <div class="color-palette">
+                <div class="color-swatch" style="background:#94b8e0;" data-name="modrá"></div>
+                <div class="color-swatch" style="background:#b0a0d4;" data-name="fialová"></div>
+                <div class="color-swatch" style="background:#e4b3c8;" data-name="růžová"></div>
+                <div class="color-swatch" style="background:#a8dcd1;" data-name="mint"></div>
+                <div class="color-swatch" style="background:#f0b8a8;" data-name="lososová"></div>
+                <div class="color-swatch" style="background:#c8b8e8;" data-name="levandule"></div>
+            </div>
+        </section>
+
+        <section class="fade-in" id="galerie">
+            <h2>Jak jdeme časem</h2>
+            <div class="scroll-gallery-wrap">
+            <button class="gallery-nav left" id="gallery-prev">&#8249;</button>
+            <button class="gallery-nav right" id="gallery-next">&#8250;</button>
+            <div class="scroll-gallery">
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/01.webp" data-full="images/gallery/01.webp" alt="První selfie" loading="lazy"><div class="caption"><strong>29. 3. 2013</strong>První selfie</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/02.webp" data-full="images/gallery/02.webp" alt="Koniklece, Brno" loading="lazy"><div class="caption"><strong>17. 4. 2013</strong>Koniklece, Brno</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/03.webp" data-full="images/gallery/03.webp" alt="Cambridge" loading="lazy"><div class="caption"><strong>27. 1. 2014</strong>První dovolená, Cambridge</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/04.webp" data-full="images/gallery/04.webp" alt="Amsterdam" loading="lazy"><div class="caption"><strong>1. 2. 2017</strong>Amsterdam, Nizozemí</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/05.webp" data-full="images/gallery/05.webp" alt="Německo" loading="lazy"><div class="caption"><strong>18. 9. 2019</strong>Německo u Düsseldorfu</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/06.webp" data-full="images/gallery/06.webp" alt="Znojemský pivovar" loading="lazy"><div class="caption"><strong>4. 7. 2021</strong>Znojemský pivovar</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/07.webp" data-full="images/gallery/07.webp" alt="Stockholm" loading="lazy"><div class="caption"><strong>11. 10. 2021</strong>Brewdog, Stockholm</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/08.webp" data-full="images/gallery/08.webp" alt="Předklášteří" loading="lazy"><div class="caption"><strong>20. 11. 2021</strong>Vorkloster Předklášteří</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/09.webp" data-full="images/gallery/09.webp" alt="New York City" loading="lazy"><div class="caption"><strong>26. 2. 2022</strong>New York City</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/10.webp" data-full="images/gallery/10.webp" alt="Starbase, Texas" loading="lazy"><div class="caption"><strong>4. 3. 2022</strong>Starbase, Texas</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/11.webp" data-full="images/gallery/11.webp" alt="Atlantis" loading="lazy"><div class="caption"><strong>9. 3. 2022</strong>S raketoplánem Atlantis</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/12.webp" data-full="images/gallery/12.webp" alt="Lužánky" loading="lazy"><div class="caption"><strong>15. 6. 2022</strong>Lužánky</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/13.webp" data-full="images/gallery/13.webp" alt="Čejkovice" loading="lazy"><div class="caption"><strong>30. 7. 2022</strong>Kdesi u Čejkovic</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/14.webp" data-full="images/gallery/14.webp" alt="Olomóc" loading="lazy"><div class="caption"><strong>9. 10. 2022</strong>Olomóc</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/15.webp" data-full="images/gallery/15.webp" alt="Haag" loading="lazy"><div class="caption"><strong>13. 9. 2023</strong>Haag, Nizozemí</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/16.webp" data-full="images/gallery/16.webp" alt="Norsko" loading="lazy"><div class="caption"><strong>2. 7. 2024</strong>Norsko</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/17.webp" data-full="images/gallery/17.webp" alt="Rakousko" loading="lazy"><div class="caption"><strong>12. 7. 2025</strong>Rakousko</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/18.webp" data-full="images/gallery/18.webp" alt="Tesluje" loading="lazy"><div class="caption"><strong>31. 8. 2025</strong>Bára poprvé Tesluje</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/19.webp" data-full="images/gallery/19.webp" alt="Rakouské hranice" loading="lazy"><div class="caption"><strong>16. 11. 2025</strong>U rakouských hranic</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/20.webp" data-full="images/gallery/20.webp" alt="Hoover Dam" loading="lazy"><div class="caption"><strong>3. 3. 2026</strong>Hoover Dam</div></div>
+                <div class="scroll-gallery-item"><img src="images/gallery/thumbs/21.webp" data-full="images/gallery/21.webp" alt="Tesla Santa Fe" loading="lazy"><div class="caption"><strong>10. 3. 2026</strong>Tesla Santa Fe</div></div>
+            </div>
+            </div>
+        </section>
+
+        <section class="card fade-in gift-section" id="dary">
             <h2>Dary</h2>
             <p>Pokud nás budete chtít obdarovat, opravdu platí, že Vaše účast na našem dni je ten nejlepší dar. Druhý nejlepší určitě bude převod na účet, který bude použit na naše oblíbené cestování po světě.</p>
-            <div style="text-align: center; margin-top: 20px;">
-                <img src="images/qr-dary.png" alt="QR kód pro platbu" style="max-width: 220px; border-radius: 8px;">
+            <div class="qr-wrap">
+                <img src="images/qr-dary.png" alt="QR kód pro platbu">
             </div>
         </section>
 
-        <section id="svedci">
+        <section class="card fade-in" id="doprava">
+            <h2>Doprava a parkování</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>MHD</strong>
+                    Tram 1, 2, 4, 5, 6 · Trolejbus 25, 26, 37 · Autobus 52, 84
+                    <br><small style="color:var(--text-light);">Zastávka: Mendlovo náměstí</small>
+                </div>
+                <div class="info-item">
+                    <strong>Autem</strong>
+                    Parkování v okolních ulicích (zóna B, v sobotu zdarma)
+                </div>
+            </div>
+        </section>
+
+        <section class="card fade-in" id="svedci">
             <h2>Svědci</h2>
             <div class="witnesses">
                 <div class="witness">
                     <img src="images/svedci/eliska.jpg" alt="Eliška Hůlková" class="witness-photo">
                     <h3>Eliška Hůlková</h3>
+                    <p><a href="tel:+420603569394">+420 603 569 394</a></p>
+                    <p><a href="mailto:celloarashii@gmail.com">celloarashii@gmail.com</a></p>
                 </div>
                 <div class="witness">
                     <img src="images/svedci/marek.jpg" alt="Marek Zukal" class="witness-photo">
                     <h3>Marek Zukal</h3>
+                    <p><a href="tel:+420728359614">+420 728 359 614</a></p>
+                    <p><a href="mailto:marek.zukal@gmail.com">marek.zukal@gmail.com</a></p>
                 </div>
             </div>
         </section>
 
-        <section id="rsvp">
-            <h2>RSVP</h2>
-            <p>Prosíme o potvrzení účasti do 1. dubna 2026.</p>
-            <p>Kontaktní údaje najdete v pozvánce.</p>
-        </section>
     </div>
+
+    <footer>
+        <p>Nemůžeme se dočkat, až s vámi tento den oslavíme!</p>
+    </footer>
 
     <div class="lightbox" id="lightbox">
         <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <span class="lightbox-arrow prev" id="lightbox-prev">&#8249;</span>
+        <span class="lightbox-arrow next" id="lightbox-next">&#8250;</span>
         <img src="" alt="Zvětšená fotka" id="lightbox-img">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
 
     <script>
-        const images = document.querySelectorAll('.gallery img');
+        // Countdown
+        function updateCountdown() {
+            const wedding = new Date('2026-06-20T12:00:00');
+            const now = new Date();
+            const diff = wedding - now;
+
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML = '<p style="font-size:1.2em;">Dnes je ten den!</p>';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('cd-days').textContent = days;
+            document.getElementById('cd-hours').textContent = hours;
+            document.getElementById('cd-mins').textContent = mins;
+            document.getElementById('cd-secs').textContent = secs;
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Gallery scroll navigation
+        const scrollGallery = document.querySelector('.scroll-gallery');
+        document.getElementById('gallery-prev').addEventListener('click', () => {
+            scrollGallery.scrollBy({ left: -scrollGallery.offsetWidth * 0.7, behavior: 'smooth' });
+        });
+        document.getElementById('gallery-next').addEventListener('click', () => {
+            scrollGallery.scrollBy({ left: scrollGallery.offsetWidth * 0.7, behavior: 'smooth' });
+        });
+
+        // Lightbox with navigation
+        const items = document.querySelectorAll('.scroll-gallery-item');
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        let currentIndex = 0;
 
-        images.forEach(img => {
-            img.addEventListener('click', () => {
-                lightboxImg.src = img.dataset.full || img.src;
-                lightbox.classList.add('active');
-            });
-        });
+        function openLightbox(index) {
+            currentIndex = index;
+            const item = items[index];
+            const img = item.querySelector('img');
+            const caption = item.querySelector('.caption');
+            lightboxImg.src = img.dataset.full || img.src;
+            lightboxCaption.innerHTML = caption ? caption.innerHTML : '';
+            lightbox.classList.add('active');
+        }
 
-        lightboxClose.addEventListener('click', () => {
+        function closeLightbox() {
             lightbox.classList.remove('active');
+        }
+
+        function nextPhoto() {
+            currentIndex = (currentIndex + 1) % items.length;
+            openLightbox(currentIndex);
+        }
+
+        function prevPhoto() {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            openLightbox(currentIndex);
+        }
+
+        items.forEach((item, i) => {
+            item.querySelector('img').addEventListener('click', () => openLightbox(i));
         });
+
+        document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+        document.getElementById('lightbox-next').addEventListener('click', nextPhoto);
+        document.getElementById('lightbox-prev').addEventListener('click', prevPhoto);
 
         lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                lightbox.classList.remove('active');
-            }
+            if (e.target === lightbox) closeLightbox();
         });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'ArrowRight') nextPhoto();
+            else if (e.key === 'ArrowLeft') prevPhoto();
+            else if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Scroll fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     </script>
-    
-    <footer>
-        <p>Nemůžeme se dočkat, až s vámi tento den oslavíme! <3</p>
-    </footer>
 </body>
 </html>
