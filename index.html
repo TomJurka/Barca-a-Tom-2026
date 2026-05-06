@@ -6,13 +6,14 @@
     <meta name="robots" content="noindex, nofollow">
     <meta property="og:title" content="Svatba Báry a Toma — 20. 6. 2026">
     <meta property="og:description" content="Zveme vás na naši svatbu! 20. června 2026, Mendelův skleník, Brno.">
-    <meta property="og:image" content="images/gallery/01.webp">
+    <meta property="og:image" content="images/header-hero.jpg">
     <meta property="og:type" content="website">
-    <title>Svatba Báry a Toma</title>
+    <title>Svatba Barči a Toma</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="images/header-hero.jpg">
     <link rel="preload" as="image" href="images/gallery/thumbs/01.webp">
     <link rel="preload" as="image" href="images/gallery/thumbs/02.webp">
     <link rel="preload" as="image" href="images/gallery/thumbs/03.webp">
@@ -145,38 +146,137 @@
             box-shadow: 0 2px 10px rgba(74, 143, 212, 0.1);
         }
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 50%, var(--pink) 100%);
-            color: white;
-            text-align: center;
-            padding: 100px 20px 80px;
+        /* Hero header — foto vpravo (pár), nápis vlevo přes přechod */
+        .site-header {
             position: relative;
+            /* Na širokých oknech přibývá výška — předejít ultra nízkému hero + odříznutí hlav při cover */
+            min-height: clamp(540px, 52vh, 760px);
+            display: flex;
+            align-items: center;
+            padding-block: clamp(72px, 10vw, 110px) clamp(56px, 7vw, 88px);
+            padding-inline: 0;
             overflow: hidden;
+            color: #fff;
+            text-align: left;
         }
-        header::before {
-            content: '';
+        .header-media {
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.15) 0%, transparent 60%);
+            inset: 0;
+            z-index: 0;
         }
-        header h1 {
+        .header-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Trochu doleva + výš — hlavy zůstanou ve výřezu i při nízkém poměru stran okna */
+            object-position: 62% 24%;
+            display: block;
+        }
+        .header-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background: linear-gradient(
+                103deg,
+                rgba(22, 36, 58, 0.93) 0%,
+                rgba(22, 36, 58, 0.78) min(380px, 26vw),
+                rgba(22, 36, 58, 0.42) min(620px, 52vw),
+                rgba(22, 36, 58, 0.14) 72%,
+                transparent 90%
+            );
+        }
+        /* Text zarovnaný v „sloupci“ — na ultrawide nepřilepený k levému kraji, blíž k páru */
+        .header-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-inline: clamp(22px, 4vw, 56px);
+        }
+        .header-inner {
+            position: relative;
+            max-width: min(440px, 90vw);
+            margin-right: auto;
+            padding: 1.35rem 1.55rem 1.5rem;
+            background: rgba(12, 24, 40, 0.58);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.28),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+        .site-header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2.2em, 6vw, 4em);
+            font-size: clamp(2.1em, 5.5vw, 3.6em);
             font-weight: 700;
-            margin: 0 0 12px;
+            margin: 0 0 6px;
             letter-spacing: -0.02em;
-            position: relative;
+            color: #fff;
+            line-height: 1.1;
+            text-shadow:
+                0 1px 0 rgba(0, 0, 0, 0.25),
+                0 2px 8px rgba(0, 0, 0, 0.45),
+                0 0 1px rgba(0, 0, 0, 0.9);
         }
-        header > p {
-            font-size: 1.15em;
-            opacity: 0.9;
-            font-weight: 300;
-            position: relative;
-            margin: 0 0 8px;
+        .site-header h2.header-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1em, 2.8vw, 1.65em);
+            font-weight: 400;
+            margin: 0;
+            opacity: 0.98;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.98);
+            text-align: left;
+            letter-spacing: 0;
+            text-shadow:
+                0 1px 2px rgba(0, 0, 0, 0.5),
+                0 2px 14px rgba(0, 0, 0, 0.35),
+                0 0 1px rgba(0, 0, 0, 0.85);
+        }
+        .site-header .countdown-item .number {
+            text-shadow:
+                0 1px 2px rgba(0, 0, 0, 0.55),
+                0 2px 16px rgba(0, 0, 0, 0.4),
+                0 0 1px rgba(0, 0, 0, 0.9);
+        }
+        .site-header .countdown-item .label {
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+            opacity: 0.92;
+        }
+        .site-header .countdown {
+            justify-content: flex-start;
+            margin-top: 28px;
+        }
+
+        @media (min-width: 1200px) {
+            .site-header {
+                min-height: clamp(580px, 48vh, 800px);
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .site-header {
+                min-height: clamp(620px, 50vh, 860px);
+            }
+            .header-content {
+                max-width: 1360px;
+            }
+            .header-media img {
+                object-position: 56% 22%;
+            }
+        }
+
+        @media (min-width: 2000px) {
+            .site-header {
+                min-height: clamp(660px, 52vh, 900px);
+            }
+            .header-media img {
+                object-position: 52% 20%;
+            }
         }
         .countdown {
             position: relative;
@@ -307,6 +407,21 @@
         .program-row.reverse + .program-arrow-down {
             justify-content: flex-start;
         }
+        .program-dj-note {
+            margin: 26px auto 4px;
+            max-width: 36em;
+            text-align: center;
+            font-size: 0.95em;
+            line-height: 1.78;
+            color: var(--text);
+        }
+        .dj-emote-inline {
+            height: 1.5em;
+            width: auto;
+            vertical-align: -0.15em;
+            margin-left: 6px;
+            image-rendering: pixelated;
+        }
 
         /* Scroll Strip Gallery */
         .scroll-gallery-wrap {
@@ -406,6 +521,17 @@
             max-width: 180px;
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(59,130,246,0.1);
+        }
+        .gift-section .gift-bank-details {
+            margin-top: 22px;
+            margin-bottom: 0;
+            font-size: 0.95em;
+            line-height: 1.75;
+            color: var(--text);
+        }
+        .gift-section .gift-bank-details strong {
+            color: var(--heading);
+            font-weight: 500;
         }
 
         /* Dress code */
@@ -710,17 +836,49 @@
                     transition: none !important;
                 }
             }
-            header {
-                padding: 70px 20px 60px;
+            .site-header {
+                min-height: 420px;
+                align-items: flex-end;
+                padding-block: 96px 40px;
+                padding-inline: 0;
             }
-            header h1 {
-                font-size: 1.8em;
+            .header-content {
+                max-width: none;
+                padding-inline: 20px;
+            }
+            .header-media img {
+                object-position: 58% 28%;
+            }
+            .header-overlay {
+                background: linear-gradient(
+                    180deg,
+                    rgba(20, 32, 52, 0.65) 0%,
+                    rgba(20, 32, 52, 0.15) 38%,
+                    rgba(20, 32, 52, 0.2) 55%,
+                    rgba(14, 24, 40, 0.92) 100%
+                );
+            }
+            .header-inner {
+                max-width: none;
+                width: 100%;
+                margin: 0 auto;
+                text-align: center;
+                padding: 1.2rem 1.1rem 1.35rem;
+            }
+            .site-header h2.header-tagline {
+                text-align: center;
+            }
+            .site-header .countdown {
+                justify-content: center;
+            }
+            .site-header h1 {
+                font-size: clamp(1.85em, 7vw, 2.35em);
             }
             .countdown {
                 gap: 12px;
             }
             .countdown-item .number {
-                font-size: 1.8em;
+                font-size: 1.65em;
             }
             section.card {
                 padding: 28px 20px;
@@ -802,13 +960,22 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>Bárča & Tom jsou připraveni k odletu</h1>
-        <div class="countdown" id="countdown">
-            <div class="countdown-item"><span class="number" id="cd-days">--</span><span class="label">dní</span></div>
-            <div class="countdown-item"><span class="number" id="cd-hours">--</span><span class="label">hodin</span></div>
-            <div class="countdown-item"><span class="number" id="cd-mins">--</span><span class="label">minut</span></div>
-            <div class="countdown-item"><span class="number" id="cd-secs">--</span><span class="label">sekund</span></div>
+    <header class="site-header">
+        <div class="header-media">
+            <img src="images/header-hero.jpg" alt="" width="5937" height="3958" decoding="async" fetchpriority="high">
+        </div>
+        <div class="header-overlay" aria-hidden="true"></div>
+        <div class="header-content">
+            <div class="header-inner">
+                <h1>Barča &amp; Tom</h1>
+                <h2 class="header-tagline">jsou připraveni k odletu</h2>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item"><span class="number" id="cd-days">--</span><span class="label">dní</span></div>
+                    <div class="countdown-item"><span class="number" id="cd-hours">--</span><span class="label">hodin</span></div>
+                    <div class="countdown-item"><span class="number" id="cd-mins">--</span><span class="label">minut</span></div>
+                    <div class="countdown-item"><span class="number" id="cd-secs">--</span><span class="label">sekund</span></div>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -821,7 +988,7 @@
             </button>
         </div>
         <div class="nav-links" id="nav-links">
-            <a href="#o-nas">O nás</a>
+            <a href="#o-nas">Proč</a>
             <a href="#datum">Kdy a kde</a>
             <a href="#program">Program</a>
             <a href="#dresscode">Dress code</a>
@@ -836,8 +1003,8 @@
         <section class="card fade-in" id="o-nas">
             <h2>Co je k tomu vedlo?</h2>
             <p>Barča a Tom se konečně budou brát! Však už jsou taky zasnoubení od 21.2.2021. Znají se ale už mnohem déle a celkově vznikl konzensus, že spolu chodí od 20.3.2013. Svatba je tedy přesne po 13 letech a 3 měsících!</p>
-            <p>Za ta léta jsem si toho spolu hodně prožili. Užíváme si společné zájmy, kterým vévodí cestování, hraní deskovek, koukání na filmy a seriály a v neposlední řadě pití piva (to se dá dělat u všech těch činností). Samozřejmě se někdy neshodneme,
-                 ale už se tak dobře známe, že vše vždy vyřešíme. </p>
+            <p>Za ta léta jsem si toho spolu hodně prožili. Užíváme si společné zájmy, kterým vévodí cestování, hraní deskovek, koukání na filmy a seriály a v neposlední řadě pití piva (to se dá dělat u všech těch činností). Občas máme na věci opačný názor, ale 
+                vždycky dojdeme ke shodě. </p>
         </section>
 
         <section class="card fade-in" id="datum">
@@ -849,29 +1016,31 @@
                 </div>
                 <div class="info-item">
                     <strong>Místo</strong>
-                    Mendelův skleník, Brno-město
+                    Mendelův skleník<br>
+                    Mendlovo náměstí 1a, Brno
                 </div>
                 <div class="info-item">
-                    <strong>Začátek</strong>
+                    <strong>Obřad</strong>
                     12:00
                 </div>
             </div>
-            <p class="venue-intro">Hledali jsme místo, které bude dobře dostupné pro všechny a kde se budeme cítit dobře. Máme rádi moderní architekturu a proto nás skleník oslovil jak svým umístěním, tak moderním provedením a rovněž historií, na kterou odkazuje. Na stejném místě měl totiž skleník pan Mendel a pěstoval v něm hrášky na své genetické experimenty.</p>
+            <p class="venue-intro">Hledali jsme místo, které bude dobře dostupné pro všechny a kde se budeme cítit dobře. Máme rádi moderní architekturu a proto nás skleník oslovil jak svým umístěním, tak moderním provedením a rovněž historií, na kterou odkazuje. Na stejném místě měl totiž skleník pan Mendel a pěstoval v něm hrášky na své genetické experimenty.
+            </p>
             <div class="map-wrap">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d800!2d16.59345632421695!3d49.19106392269466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1scs!2scz!4v1" allowfullscreen loading="lazy"></iframe>
             </div>
+            <p class="venue-intro">Fun fact, skleník se postavil až po našem zasnoubení.</p>
         </section>
 
         <section class="rsvp-section fade-in" id="rsvp">
-            <h2>RSVP</h2>
-            <p>Prosíme o potvrzení účasti do 20. května 2026.</p>
-            <p>Vyplňte nám krátký formulář — zabere to minutku.</p>
+            <h2>Ano, i my máme formulář, nuda co?</h2>
+            <p>Prosíme o vyplnění formuláře a potvrzení účasti do 20. května 2026.</p>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSflb5icu_Z6nXJI2GXvZn0-Oqd2Jh8Aiblpslhy0Rw4f0qZ-w/viewform?usp=dialog" target="_blank" class="rsvp-btn">Vyplnit formulář</a>
         </section>
 
         <section class="card fade-in" id="program">
             <h2>Program</h2>
-            <p class="program-intro">Změna, samozřejmě, vyhrazena :))</p>
+            <p class="venue-intro">Změna, samozřejmě, vyhrazena :))</p>
             <div class="program-snake">
                 <div class="program-row">
                     <div class="program-item"><span class="program-icon">👋</span><div><strong>11:00</strong><span>Příjezd hostů</span></div></div>
@@ -907,6 +1076,7 @@
                     <div class="program-item program-item-half"><span class="program-icon">🌙</span><div><strong>02:00</strong><span>Konec?</span></div></div>
                 </div>
             </div>
+            <p class="program-dj-note">DJ bude Spotify, takže nám prosím nahlašte vaše oblíbené bangery <img src="images/monka-party.webp" alt="" class="dj-emote-inline" width="28" height="27" loading="lazy" decoding="async"></p>
         </section>
 
         <section class="card fade-in" id="dresscode">
@@ -963,6 +1133,10 @@
             <div class="qr-wrap">
                 <img src="images/qr-dary.png" alt="QR kód pro platbu">
             </div>
+            <p class="gift-bank-details">
+                <strong>Číslo účtu:</strong> 287892279/0300<br>
+                <strong>Variabilní symbol:</strong> 6942
+            </p>
         </section>
 
         <section class="card fade-in" id="doprava">
