@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
     <title>Svatba Báry a Toma</title>
     <style>
         body {
@@ -52,7 +53,11 @@
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 12px;
+            gap: 16px;
+        }
+        .gallery figure {
+            margin: 0;
+            text-align: center;
         }
         .gallery img {
             width: 100%;
@@ -65,6 +70,47 @@
         .gallery img:hover {
             transform: scale(1.03);
             box-shadow: 0 4px 20px rgba(0,102,204,0.25);
+        }
+        .gallery figcaption {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 6px;
+        }
+        .witnesses {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .witness {
+            text-align: center;
+            max-width: 200px;
+        }
+        .witness-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #e0e0e0;
+            display: block;
+            margin: 0 auto 12px;
+        }
+        .witness h3 {
+            margin: 0 0 6px;
+            color: #0066cc;
+            font-size: 1.1em;
+        }
+        .witness p {
+            margin: 4px 0;
+            font-size: 0.9em;
+        }
+        .witness a {
+            color: #4da6ff;
+            text-decoration: none;
+        }
+        .witness a:hover {
+            text-decoration: underline;
         }
         .lightbox {
             display: none;
@@ -101,8 +147,8 @@
     
     <div class="container">
         <section id="o-nas">
-            <h2>O nás</h2>
-            <p>Tom a Bára se budou brát. Jsou spolu už nějaký ten pátek a tak už bylo záhodno do toho praštit.</p>
+            <h2>Proč?</h2>
+            <p>Barča a Tom se konečně budou brát! Však už jsou taky zasnoubení od 21.2.2021</p>
         </section>
         
         <section id="datum">
@@ -123,29 +169,29 @@
         </section>
         
         <section id="galerie">
-            <h2>Naše fotky</h2>
+            <h2>Jak jdeme časem</h2>
             <div class="gallery">
-                <img src="images/gallery/IMG_20170201_174501.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/IMG_20190918_174513.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/20210704_123826.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/20211011_210746.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/20211120_203922.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/20220226_105053.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/20220304_125203.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/20220309_153859.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/IMG20220615201052.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/20220730_192629.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/20221009_180512(0).jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/20230913_130531.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/20240702_183828.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/20250712_122340.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/20250831_155852.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/20251116_131810.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/20260303_124516.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/20260310_175147.jpg" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/DSCN4612.JPG" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/DSCN4922.JPG" alt="Fotka z našeho příběhu" loading="lazy">
-                <img src="images/gallery/DSCN9347.JPG" alt="Fotka z našeho příběhu" loading="lazy">
+                <figure><img src="images/gallery/thumbs/01.webp" data-full="images/gallery/01.webp" alt="29. 3. 2013" loading="lazy"><figcaption>29. 3. 2013</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/02.webp" data-full="images/gallery/02.webp" alt="17. 4. 2013" loading="lazy"><figcaption>17. 4. 2013</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/03.webp" data-full="images/gallery/03.webp" alt="27. 1. 2014" loading="lazy"><figcaption>27. 1. 2014</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/04.webp" data-full="images/gallery/04.webp" alt="1. 2. 2017" loading="lazy"><figcaption>1. 2. 2017</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/05.webp" data-full="images/gallery/05.webp" alt="18. 9. 2019" loading="lazy"><figcaption>18. 9. 2019</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/06.webp" data-full="images/gallery/06.webp" alt="4. 7. 2021" loading="lazy"><figcaption>4. 7. 2021</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/07.webp" data-full="images/gallery/07.webp" alt="11. 10. 2021" loading="lazy"><figcaption>11. 10. 2021</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/08.webp" data-full="images/gallery/08.webp" alt="20. 11. 2021" loading="lazy"><figcaption>20. 11. 2021</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/09.webp" data-full="images/gallery/09.webp" alt="26. 2. 2022" loading="lazy"><figcaption>26. 2. 2022</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/10.webp" data-full="images/gallery/10.webp" alt="4. 3. 2022" loading="lazy"><figcaption>4. 3. 2022</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/11.webp" data-full="images/gallery/11.webp" alt="9. 3. 2022" loading="lazy"><figcaption>9. 3. 2022</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/12.webp" data-full="images/gallery/12.webp" alt="15. 6. 2022" loading="lazy"><figcaption>15. 6. 2022</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/13.webp" data-full="images/gallery/13.webp" alt="30. 7. 2022" loading="lazy"><figcaption>30. 7. 2022</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/14.webp" data-full="images/gallery/14.webp" alt="9. 10. 2022" loading="lazy"><figcaption>9. 10. 2022</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/15.webp" data-full="images/gallery/15.webp" alt="13. 9. 2023" loading="lazy"><figcaption>13. 9. 2023</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/16.webp" data-full="images/gallery/16.webp" alt="2. 7. 2024" loading="lazy"><figcaption>2. 7. 2024</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/17.webp" data-full="images/gallery/17.webp" alt="12. 7. 2025" loading="lazy"><figcaption>12. 7. 2025</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/18.webp" data-full="images/gallery/18.webp" alt="31. 8. 2025" loading="lazy"><figcaption>31. 8. 2025</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/19.webp" data-full="images/gallery/19.webp" alt="16. 11. 2025" loading="lazy"><figcaption>16. 11. 2025</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/20.webp" data-full="images/gallery/20.webp" alt="3. 3. 2026" loading="lazy"><figcaption>3. 3. 2026</figcaption></figure>
+                <figure><img src="images/gallery/thumbs/21.webp" data-full="images/gallery/21.webp" alt="10. 3. 2026" loading="lazy"><figcaption>10. 3. 2026</figcaption></figure>
             </div>
         </section>
 
@@ -157,10 +203,24 @@
             </div>
         </section>
 
+        <section id="svedci">
+            <h2>Svědci</h2>
+            <div class="witnesses">
+                <div class="witness">
+                    <img src="images/svedci/eliska.jpg" alt="Eliška Hůlková" class="witness-photo">
+                    <h3>Eliška Hůlková</h3>
+                </div>
+                <div class="witness">
+                    <img src="images/svedci/marek.jpg" alt="Marek Zukal" class="witness-photo">
+                    <h3>Marek Zukal</h3>
+                </div>
+            </div>
+        </section>
+
         <section id="rsvp">
             <h2>RSVP</h2>
             <p>Prosíme o potvrzení účasti do 1. dubna 2026.</p>
-            <p>Kontakt: jurkatom@gmail.com nebo telefon: +420 775 029 393</p>
+            <p>Kontaktní údaje najdete v pozvánce.</p>
         </section>
     </div>
 
@@ -177,7 +237,7 @@
 
         images.forEach(img => {
             img.addEventListener('click', () => {
-                lightboxImg.src = img.src;
+                lightboxImg.src = img.dataset.full || img.src;
                 lightbox.classList.add('active');
             });
         });
