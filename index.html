@@ -797,12 +797,15 @@
                 display: contents;
             }
             .nav-brand {
-                display: block;
+                display: none;
                 text-align: center;
                 font-size: clamp(1.25rem, 2.2vw, 1.65rem);
                 margin: 0;
                 padding: 0 16px;
                 width: 100%;
+            }
+            body.hero-off-screen .nav-brand {
+                display: block;
             }
             .nav-links {
                 width: 100%;
@@ -855,6 +858,7 @@
             }
             .nav-links {
                 flex-direction: column;
+                justify-content: flex-start;
                 align-items: center;
                 gap: 10px;
                 margin-top: 0;
@@ -876,6 +880,7 @@
                 flex: 1 1 auto;
                 min-height: 0;
                 margin-top: 6px;
+                padding-top: 4px;
                 visibility: visible;
                 pointer-events: auto;
                 padding-bottom: max(8px, env(safe-area-inset-bottom, 0px));
