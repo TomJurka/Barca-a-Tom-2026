@@ -86,6 +86,13 @@
             line-height: 1.2;
             white-space: nowrap;
         }
+        .nav-date {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.7em;
+            color: var(--text-light);
+            margin-left: 6px;
+        }
         .nav-menu-btn {
             display: none;
             align-items: center;
@@ -193,7 +200,7 @@
         }
         .header-inner {
             position: relative;
-            max-width: min(440px, 90vw);
+            max-width: min(500px, 90vw);
             margin-right: auto;
             padding: 1.35rem 1.55rem 1.5rem;
             background: rgba(12, 24, 40, 0.58);
@@ -778,6 +785,9 @@
                 gap: 8px;
                 padding: 12px 20px 10px;
             }
+            .nav-toolbar {
+                display: contents;
+            }
             .nav-brand {
                 text-align: center;
                 font-size: clamp(1.25rem, 2.2vw, 1.65rem);
@@ -836,9 +846,18 @@
                 background: rgba(250,248,255,0.97);
                 backdrop-filter: blur(16px);
             }
+            nav.menu-open .nav-toolbar {
+                justify-content: space-between;
+            }
+            nav.menu-open .nav-brand {
+                display: block;
+                font-size: clamp(1.05rem, 4vw, 1.25rem);
+            }
             nav.menu-open .nav-links {
                 display: flex;
                 flex-direction: column;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
                 align-items: center;
                 gap: 10px;
                 flex: 1 1 auto;
@@ -850,6 +869,7 @@
             }
             nav.menu-open .nav-links a {
                 box-sizing: border-box;
+                flex-shrink: 0;
                 width: min(280px, 100%);
                 text-align: center;
                 font-size: 0.95em;
@@ -1019,7 +1039,7 @@
     <div id="nav-backdrop" class="nav-backdrop" aria-hidden="true"></div>
     <nav id="main-nav" aria-label="Hlavní navigace">
         <div class="nav-toolbar">
-            <span class="nav-brand">Barča &amp; Tom</span>
+            <span class="nav-brand">Barča &amp; Tom <span class="nav-date">20.06.2026</span></span>
             <button type="button" class="nav-menu-btn" id="nav-menu-btn" aria-expanded="false" aria-controls="nav-links" aria-label="Otevřít menu">
                 <span class="nav-menu-btn-icon" aria-hidden="true">🚀</span>
                 <span class="nav-menu-btn-label" id="nav-menu-btn-label">Menu</span>
