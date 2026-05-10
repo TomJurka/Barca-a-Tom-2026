@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="images/header-hero.jpg">
     <link rel="preload" as="image" href="images/1.jpg">
+    <link rel="preload" as="image" href="images/2.jpg">
     <link rel="preload" as="image" href="images/gallery/thumbs/01.webp">
     <link rel="preload" as="image" href="images/gallery/thumbs/02.webp">
     <link rel="preload" as="image" href="images/gallery/thumbs/03.webp">
@@ -328,8 +329,9 @@
             border: 1px solid var(--card-border);
         }
         .after-nav-photo {
-            margin: 0;
-            padding: 0;
+            margin: 0 auto;
+            padding: 0 24px;
+            max-width: 900px;
             width: 100%;
             overflow: hidden;
             line-height: 0;
@@ -341,6 +343,93 @@
         }
         .after-nav-photo + .container {
             padding-top: 28px;
+        }
+
+        /* Fotka + panel „Kdy a kde“ (lehce průhledný) */
+        .photo-band {
+            margin: 40px 0;
+            line-height: 0;
+        }
+        .photo-band__media {
+            position: relative;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 4px 24px var(--card-shadow);
+        }
+        .photo-band__media img {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+        .photo-band__overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: clamp(14px, 3vw, 28px);
+            pointer-events: none;
+        }
+        .photo-band__panel {
+            pointer-events: auto;
+            width: 100%;
+            max-width: 720px;
+            padding: clamp(22px, 4vw, 34px) clamp(20px, 4vw, 36px);
+            background: rgba(250, 248, 255, 0.86);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 12px 40px rgba(45, 65, 100, 0.18);
+            scroll-margin-top: 80px;
+            line-height: normal;
+        }
+        .photo-band__panel h2 {
+            /* Stejné jako globální h2 — explicitně kvůli kontextu v figure */
+            font-family: 'Playfair Display', serif;
+            color: var(--heading);
+            font-size: 1.8em;
+            font-weight: 700;
+            margin: 0 0 22px;
+            letter-spacing: -0.01em;
+            text-align: center;
+        }
+        .photo-band__facts {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px 20px;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+        }
+        .photo-band__fact {
+            margin: 0;
+            font-size: clamp(1rem, 2.6vw, 1.15rem);
+            font-weight: 600;
+            line-height: 1.45;
+            color: var(--heading);
+        }
+        @media (max-width: 600px) {
+            .photo-band__facts {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .photo-band__fact + .photo-band__fact {
+                margin-top: 14px;
+                padding-top: 14px;
+                border-top: 1px solid rgba(74, 143, 212, 0.2);
+            }
+            .photo-band__overlay {
+                align-items: stretch;
+            }
+            .photo-band__panel {
+                scroll-margin-top: 72px;
+                max-width: none;
+            }
+            .photo-band__panel h2 {
+                font-size: 1.4em;
+                margin-bottom: 16px;
+            }
         }
         h2 {
             font-family: 'Playfair Display', serif;
@@ -791,7 +880,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-
         /* ===== Desktop / Tablet (>600px) ===== */
         @media (min-width: 601px) {
             nav {
@@ -821,6 +909,9 @@
             section {
                 scroll-margin-top: 100px;
                 margin: 36px 0;
+            }
+            .photo-band__panel {
+                scroll-margin-top: 100px;
             }
             .container > section:first-child {
                 margin-top: 0;
@@ -1091,23 +1182,23 @@
                 vždycky dojdeme ke shodě. </p>
         </section>
 
-        <section class="card fade-in" id="datum">
-            <h2>Kdy a kde</h2>
-            <div class="info-grid">
-                <div class="info-item">
-                    <strong>Datum</strong>
-                    20. června 2026
-                </div>
-                <div class="info-item">
-                    <strong>Místo</strong>
-                    Mendelův skleník<br>
-                    Mendlovo náměstí 1a, Brno
-                </div>
-                <div class="info-item">
-                    <strong>Obřad</strong>
-                    12:00
+        <figure class="photo-band fade-in">
+            <div class="photo-band__media">
+                <img src="images/2.jpg" alt="Mendelův skleník — interiér" width="1024" height="909" decoding="async" loading="lazy">
+                <div class="photo-band__overlay">
+                    <div class="photo-band__panel" id="datum">
+                        <h2>Kdy a kde</h2>
+                        <div class="photo-band__facts">
+                            <p class="photo-band__fact">20. června 2026</p>
+                            <p class="photo-band__fact">Mendelův skleník<br>Mendlovo náměstí 1a, Brno</p>
+                            <p class="photo-band__fact">12:00</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </figure>
+
+        <section class="card fade-in">
             <p class="venue-intro">Hledali jsme místo, které bude dobře dostupné pro všechny a kde se budeme cítit dobře. Máme rádi moderní architekturu a proto nás skleník oslovil jak svým umístěním, tak moderním provedením a rovněž historií, na kterou odkazuje. Na stejném místě měl totiž skleník pan Mendel a pěstoval v něm hrášky na své genetické experimenty.
             </p>
             <div class="map-wrap">
