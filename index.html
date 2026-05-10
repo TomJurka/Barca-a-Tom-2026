@@ -82,6 +82,17 @@
             width: 100%;
             justify-content: center;
             align-items: center;
+            gap: 12px;
+        }
+        .nav-brand {
+            display: none;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: clamp(1.05rem, 4vw, 1.25rem);
+            color: var(--heading);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            white-space: nowrap;
         }
         .nav-menu-btn {
             display: none;
@@ -773,20 +784,74 @@
             transform: translateY(0);
         }
 
-        /* Responsive */
+        /* Responsive — tablet / desktop: jméno nad řádkem odkazů */
+        @media (min-width: 601px) {
+            nav {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                padding: 14px 20px 12px;
+            }
+            .nav-toolbar {
+                display: contents;
+            }
+            .nav-brand {
+                display: block;
+                text-align: center;
+                font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+                margin: 0;
+                padding: 0 16px;
+                width: 100%;
+            }
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+            }
+            .container {
+                padding-top: 22px;
+                padding-bottom: 40px;
+            }
+            section {
+                scroll-margin-top: 108px;
+                margin: 36px 0;
+            }
+            .container > section:first-child {
+                margin-top: 0;
+            }
+        }
+
         @media (max-width: 600px) {
             nav {
-                padding: 12px 16px 14px;
+                padding: 10px 16px 12px;
                 display: flex;
                 flex-direction: column;
                 align-items: stretch;
                 text-align: center;
             }
+            /* Otevřené menu: navigace = výška okna, seznam má flex:1 + min-height:0 → skutečný vnitřní scroll */
+            body.nav-menu-open nav {
+                height: 100vh;
+                height: 100dvh;
+                max-height: 100vh;
+                max-height: 100dvh;
+                overflow: hidden;
+                box-sizing: border-box;
+            }
+            body.hero-off-screen .nav-toolbar {
+                justify-content: space-between;
+                text-align: left;
+            }
+            body.hero-off-screen .nav-brand {
+                display: block;
+            }
             .nav-toolbar {
                 display: flex;
+                flex-shrink: 0;
             }
             .nav-menu-btn {
                 display: inline-flex;
+                flex-shrink: 0;
             }
             .nav-links {
                 flex-direction: column;
@@ -799,6 +864,7 @@
                 margin-left: auto;
                 margin-right: auto;
                 box-sizing: border-box;
+                min-height: 0;
                 max-height: 0;
                 overflow: hidden;
                 visibility: hidden;
@@ -807,12 +873,18 @@
                 transition: none;
             }
             .nav-links.open {
-                margin-top: 14px;
-                max-height: 100vh;
+                flex: 1 1 auto;
+                min-height: 0;
+                margin-top: 6px;
                 visibility: visible;
                 pointer-events: auto;
-                padding-bottom: 6px;
-                overflow: visible;
+                padding-bottom: max(8px, env(safe-area-inset-bottom, 0px));
+                overflow-x: hidden;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
+                touch-action: pan-y;
+                max-height: none;
             }
             .nav-links a {
                 box-sizing: border-box;
@@ -944,6 +1016,16 @@
                 right: 16px;
                 font-size: 1.6em;
             }
+            .container {
+                padding-top: 18px;
+                padding-bottom: 36px;
+            }
+            section {
+                margin: 26px 0;
+            }
+            .container > section:first-child {
+                margin-top: 0;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -980,8 +1062,9 @@
     </header>
 
     <div id="nav-backdrop" class="nav-backdrop" aria-hidden="true"></div>
-    <nav id="main-nav">
+    <nav id="main-nav" aria-label="Hlavní navigace">
         <div class="nav-toolbar">
+            <span class="nav-brand">Barča &amp; Tom</span>
             <button type="button" class="nav-menu-btn" id="nav-menu-btn" aria-expanded="false" aria-controls="nav-links" aria-label="Otevřít menu">
                 <span class="nav-menu-btn-icon" aria-hidden="true">🚀</span>
                 <span class="nav-menu-btn-label" id="nav-menu-btn-label">Menu</span>
@@ -1227,6 +1310,20 @@
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', closeMenu);
         });
+
+        // Po scrollu za hero: v řádku zobrazit jméno vlevo a menu vpravo
+        const siteHeader = document.querySelector('.site-header');
+        if (siteHeader) {
+            const heroObserver = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        document.body.classList.toggle('hero-off-screen', !entry.isIntersecting);
+                    });
+                },
+                { root: null, threshold: 0, rootMargin: '0px' }
+            );
+            heroObserver.observe(siteHeader);
+        }
         document.addEventListener('keydown', (e) => {
             if (e.key !== 'Escape') return;
             if (document.getElementById('lightbox').classList.contains('active')) return;
