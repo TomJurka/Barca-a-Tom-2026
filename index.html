@@ -38,12 +38,12 @@
             --accent-bg: #edf4fc;
             /* Nadpisy — bezpatkový font s plnou podporou češtiny */
             --font-heading: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
-            /* Odsazení kotvy od horního okraje — výška sticky menu + rezerva (viz MDN scroll-padding) */
-            --anchor-offset: calc(5.75rem + env(safe-area-inset-top, 0px));
+            /* Výchozí před načtením JS; skutečná hodnota = výška #main-nav + malý buffer (syncAnchorOffset) */
+            --anchor-offset: calc(6.5rem + env(safe-area-inset-top, 0px));
         }
         @media (min-width: 601px) {
             :root {
-                --anchor-offset: calc(8.5rem + env(safe-area-inset-top, 0px));
+                --anchor-offset: calc(9.5rem + env(safe-area-inset-top, 0px));
             }
         }
         html {
@@ -1308,7 +1308,7 @@
             <p>
                 Občerstvení bude zajištěno formou obědového a večerního rautu od naší oblíbené restaurace
                 Vegalité. Můžete se taky těšit na dort, sweet bar, dobré pití a další dobrůtky.
-                Konkrétní položky cateringu ještě ladíme, s jejich výběrem nám prosím pomožte vyplněním
+                Konkrétní položky cateringu ještě ladíme, s jejich výběrem nám prosím pomozte vyplněním
                 formuláře níže. Děkujeme za spolupráci.
             </p>
         </section>
@@ -1486,9 +1486,9 @@
                     <img
                         src="images/gallery/thumbs/12.webp"
                         data-full="images/gallery/12.webp"
-                        alt="Lužánky"
+                        alt="Björsnonův sad"
                         loading="lazy">
-                    <div class="caption"><strong>15. 6. 2022</strong>Lužánky</div>
+                    <div class="caption"><strong>15. 6. 2022</strong>Björsnonův sad</div>
                 </div>
                 <div class="scroll-gallery-item">
                     <img
@@ -1645,6 +1645,7 @@
             menuBtn.classList.remove('open');
             menuBtn.setAttribute('aria-expanded', 'false');
             if (menuBtnLabel) menuBtnLabel.textContent = 'Menu';
+            requestAnimationFrame(() => requestAnimationFrame(syncAnchorOffset));
         }
 
         function openMenu() {
@@ -1666,12 +1667,43 @@
         });
 
         const siteHeader = document.querySelector('.site-header');
+        /** Výška sticky navigace pro scroll-padding — včetně stavu „po scrollu“ (značka + zalomení odkazů). */
+        function syncAnchorOffset() {
+            if (!mainNav || mainNav.classList.contains('menu-open')) return;
+            const body = document.body;
+            const probeExpandedNav = siteHeader && !body.classList.contains('hero-off-screen');
+            let h;
+            if (probeExpandedNav) {
+                body.classList.add('hero-off-screen');
+                void mainNav.offsetHeight;
+                h = Math.ceil(mainNav.getBoundingClientRect().height);
+                body.classList.remove('hero-off-screen');
+            } else {
+                h = Math.ceil(mainNav.getBoundingClientRect().height);
+            }
+            document.documentElement.style.setProperty(
+                '--anchor-offset',
+                `calc(${h + 12}px + env(safe-area-inset-top, 0px))`
+            );
+        }
         if (siteHeader) {
             new IntersectionObserver(
-                ([entry]) => document.body.classList.toggle('hero-off-screen', !entry.isIntersecting),
+                ([entry]) => {
+                    document.body.classList.toggle('hero-off-screen', !entry.isIntersecting);
+                    syncAnchorOffset();
+                },
                 { threshold: 0 }
             ).observe(siteHeader);
         }
+        if (typeof ResizeObserver !== 'undefined' && mainNav) {
+            new ResizeObserver(() => syncAnchorOffset()).observe(mainNav);
+        }
+        window.addEventListener('resize', syncAnchorOffset, { passive: true });
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(syncAnchorOffset);
+        }
+        window.addEventListener('load', syncAnchorOffset, { passive: true });
+        syncAnchorOffset();
 
         // Countdown
         function updateCountdown() {
