@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="images/header-hero.jpg">
+    <link rel="preload" as="image" href="images/1.jpg">
     <link rel="preload" as="image" href="images/gallery/thumbs/01.webp">
     <link rel="preload" as="image" href="images/gallery/thumbs/02.webp">
     <link rel="preload" as="image" href="images/gallery/thumbs/03.webp">
@@ -325,6 +326,21 @@
             border-radius: 16px;
             box-shadow: 0 4px 24px var(--card-shadow);
             border: 1px solid var(--card-border);
+        }
+        .after-nav-photo {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        .after-nav-photo img {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+        .after-nav-photo + .container {
+            padding-top: 28px;
         }
         h2 {
             font-family: 'Playfair Display', serif;
@@ -799,6 +815,9 @@
                 padding-top: 22px;
                 padding-bottom: 40px;
             }
+            .after-nav-photo + .container {
+                padding-top: 20px;
+            }
             section {
                 scroll-margin-top: 100px;
                 margin: 36px 0;
@@ -995,6 +1014,9 @@
                 padding-top: 18px;
                 padding-bottom: 36px;
             }
+            .after-nav-photo + .container {
+                padding-top: 16px;
+            }
             section {
                 margin: 26px 0;
             }
@@ -1057,8 +1079,12 @@
         </div>
     </nav>
 
+    <figure class="after-nav-photo">
+        <img src="images/1.jpg" alt="Barča a Tom" width="1024" height="682" decoding="async" loading="eager">
+    </figure>
+
     <div class="container">
-        <section class="card fade-in" id="o-nas">
+        <section class="fade-in" id="o-nas">
             <h2>Co je k tomu vedlo?</h2>
             <p>Barča a Tom se konečně budou brát! Však už jsou taky zasnoubení od 21.2.2021. Znají se ale už mnohem déle a celkově vznikl konsenzus, že spolu chodí od 20.3.2013. Svatba je tedy přesne po 13 letech a 3 měsících!</p>
             <p>Za ta léta jsme si toho spolu hodně prožili. Užíváme si společné zájmy, kterým vévodí cestování, hraní deskovek, koukání na filmy a seriály a v neposlední řadě pití piva (to se dá dělat u všech těch činností). Občas máme na věci opačný názor, ale 
