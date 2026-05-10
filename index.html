@@ -12,7 +12,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="images/header-hero.jpg">
     <link rel="preload" as="image" href="images/1.jpg">
     <link rel="preload" as="image" href="images/2.jpg">
@@ -36,6 +36,18 @@
             --text-light: #7088a8;
             --heading: #3d6098;
             --accent-bg: #edf4fc;
+            /* Nadpisy — bezpatkový font s plnou podporou češtiny */
+            --font-heading: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
+            /* Odsazení kotvy od horního okraje — výška sticky menu + rezerva (viz MDN scroll-padding) */
+            --anchor-offset: calc(5.75rem + env(safe-area-inset-top, 0px));
+        }
+        @media (min-width: 601px) {
+            :root {
+                --anchor-offset: calc(8.5rem + env(safe-area-inset-top, 0px));
+            }
+        }
+        html {
+            scroll-padding-top: var(--anchor-offset);
         }
         * {
             box-sizing: border-box;
@@ -81,7 +93,7 @@
         }
         .nav-brand {
             display: none;
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-heading);
             font-weight: 700;
             color: var(--heading);
             letter-spacing: -0.02em;
@@ -215,7 +227,7 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
         .site-header h1 {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-heading);
             font-size: clamp(2.1em, 5.5vw, 3.6em);
             font-weight: 700;
             margin: 0 0 6px;
@@ -228,7 +240,7 @@
                 0 0 1px rgba(0, 0, 0, 0.9);
         }
         .site-header h2.header-tagline {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-heading);
             font-size: clamp(1.1em, 2.8vw, 1.65em);
             font-weight: 400;
             margin: 0;
@@ -252,9 +264,38 @@
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
             opacity: 0.92;
         }
+        .site-header .countdown-row {
+            margin-top: 28px;
+        }
+        .site-header .countdown-row .countdown {
+            margin-top: 0;
+        }
         .site-header .countdown {
             justify-content: flex-start;
-            margin-top: 28px;
+        }
+        .countdown-row {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 10px 14px;
+            margin-top: 24px;
+        }
+        .countdown-row .countdown {
+            margin-top: 0;
+        }
+        /* Baseline s číslicemi (.countdown je inline-flex kvůli flexbox baseline v řádku) */
+        .countdown-tminus {
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+            font-size: 2.4em;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: rgba(255, 255, 255, 0.96);
+            line-height: 1.2;
+            text-shadow:
+                0 1px 2px rgba(0, 0, 0, 0.55),
+                0 2px 14px rgba(0, 0, 0, 0.35),
+                0 0 1px rgba(0, 0, 0, 0.85);
+            flex-shrink: 0;
         }
 
         @media (min-width: 1200px) {
@@ -285,8 +326,8 @@
         }
         .countdown {
             position: relative;
-            margin-top: 24px;
-            display: flex;
+            margin-top: 0;
+            display: inline-flex;
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
@@ -319,7 +360,6 @@
             background: none;
             border-radius: 0;
             box-shadow: none;
-            scroll-margin-top: 60px;
         }
         /* Karta jen u sekce s formulářem (RSVP) */
         section.card {
@@ -454,12 +494,11 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--card-border);
             box-shadow: 0 12px 40px rgba(45, 65, 100, 0.18);
-            scroll-margin-top: 80px;
             line-height: normal;
         }
         .photo-band__panel h2 {
             /* Stejné jako globální h2 — explicitně kvůli kontextu v figure */
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-heading);
             color: var(--heading);
             font-size: 1.8em;
             font-weight: 700;
@@ -495,7 +534,6 @@
                 padding: 12px 14px 14px;
             }
             .photo-band__panel {
-                scroll-margin-top: 72px;
                 width: 100%;
                 max-width: none;
                 margin: 0;
@@ -519,7 +557,7 @@
             }
         }
         h2 {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-heading);
             color: var(--heading);
             font-size: 1.8em;
             font-weight: 700;
@@ -758,7 +796,7 @@
         }
         .witness h3 {
             margin: 0 0 6px;
-            font-family: 'Playfair Display', serif;
+            font-family: var(--font-heading);
             color: var(--heading);
             font-size: 1.05em;
             font-weight: 700;
@@ -940,11 +978,7 @@
                 padding-top: 20px;
             }
             section {
-                scroll-margin-top: 100px;
                 margin: 36px 0;
-            }
-            .photo-band__panel {
-                scroll-margin-top: 100px;
             }
             .container > section:first-child {
                 margin-top: 0;
@@ -1034,7 +1068,8 @@
             }
             .header-content {
                 max-width: none;
-                padding-inline: 20px;
+                padding-inline-start: max(16px, env(safe-area-inset-left, 0px));
+                padding-inline-end: max(16px, env(safe-area-inset-right, 0px));
             }
             .header-media img {
                 object-position: 58% 28%;
@@ -1053,12 +1088,18 @@
                 width: 100%;
                 margin: 0 auto;
                 text-align: center;
-                padding: 1.2rem 1.1rem 1.35rem;
+                padding: 1.2rem max(1.1rem, env(safe-area-inset-right, 0px)) 1.35rem max(1.1rem, env(safe-area-inset-left, 0px));
             }
             .site-header h2.header-tagline {
                 text-align: center;
             }
+            .site-header .countdown-row {
+                justify-content: center;
+            }
             .site-header .countdown {
+                justify-content: center;
+            }
+            .countdown-row {
                 justify-content: center;
             }
             .site-header h1 {
@@ -1068,6 +1109,9 @@
                 gap: 12px;
             }
             .countdown-item .number {
+                font-size: 1.65em;
+            }
+            .countdown-tminus {
                 font-size: 1.65em;
             }
             section.card {
@@ -1116,6 +1160,13 @@
             .after-nav-photo + .container {
                 padding-top: 16px;
             }
+            /* Pásové fotky mezi sekcemi — na mobilu přes celou šířku displeje */
+            .after-nav-photo {
+                padding: 0;
+                max-width: none;
+                margin-left: 0;
+                margin-right: 0;
+            }
             section {
                 margin: 26px 0;
             }
@@ -1146,12 +1197,15 @@
         <div class="header-content">
             <div class="header-inner">
                 <h1>Barča &amp; Tom</h1>
-                <h2 class="header-tagline">jsou připraveni k odletu 20.06.2026</h2>
-                <div class="countdown" id="countdown">
-                    <div class="countdown-item"><span class="number" id="cd-days">--</span><span class="label">dní</span></div>
-                    <div class="countdown-item"><span class="number" id="cd-hours">--</span><span class="label">hodin</span></div>
-                    <div class="countdown-item"><span class="number" id="cd-mins">--</span><span class="label">minut</span></div>
-                    <div class="countdown-item"><span class="number" id="cd-secs">--</span><span class="label">sekund</span></div>
+                <h2 class="header-tagline">Připraveni k odletu 20.06.2026</h2>
+                <div class="countdown-row" aria-label="Odpočet ve stylu T minus do svatby">
+                    <span class="countdown-tminus" aria-hidden="true">T−</span>
+                    <div class="countdown" id="countdown">
+                        <div class="countdown-item"><span class="number" id="cd-days">--</span><span class="label">dní</span></div>
+                        <div class="countdown-item"><span class="number" id="cd-hours">--</span><span class="label">hodin</span></div>
+                        <div class="countdown-item"><span class="number" id="cd-mins">--</span><span class="label">minut</span></div>
+                        <div class="countdown-item"><span class="number" id="cd-secs">--</span><span class="label">sekund</span></div>
+                    </div>
                 </div>
             </div>
         </div>
