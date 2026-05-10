@@ -321,12 +321,21 @@
             box-shadow: none;
             scroll-margin-top: 60px;
         }
+        /* Karta jen u sekce s formulářem (RSVP) */
         section.card {
-            background: var(--card-bg);
             padding: 40px;
             border-radius: 16px;
             box-shadow: 0 4px 24px var(--card-shadow);
             border: 1px solid var(--card-border);
+            background: var(--card-bg);
+        }
+        section.card.rsvp-section {
+            background: linear-gradient(135deg, var(--purple-deep), var(--pink));
+            color: white;
+            border-color: rgba(255, 255, 255, 0.22);
+        }
+        section.card.rsvp-section h2 {
+            color: white;
         }
         .after-nav-photo {
             margin: 0 auto;
@@ -343,6 +352,71 @@
         }
         .after-nav-photo + .container {
             padding-top: 28px;
+        }
+        /* Druhá pásová fotka: stejný „vzduch“ jako mezi 1.jpg a první sekcí (padding-top kontejneru) */
+        .container:has(+ .after-nav-photo) {
+            padding-bottom: 0;
+        }
+        .container:has(+ .after-nav-photo) > section:last-of-type {
+            margin-bottom: 0;
+        }
+        .container + .after-nav-photo {
+            margin-top: 28px;
+        }
+
+        /* Odstavcový text jako „Co je k tomu vedlo?“ — zarovnání vlevo, řádkování jako body */
+        .prose {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            color: var(--text);
+        }
+        .prose > p {
+            margin: 0 0 1em;
+            text-align: left;
+            font-size: 1em;
+            line-height: 1.8;
+            max-width: none;
+        }
+        .prose > p:last-child {
+            margin-bottom: 0;
+        }
+        .prose .dresscode-themes {
+            margin: 0.5em 0 1em;
+            padding-left: 1.35em;
+            max-width: none;
+            text-align: left;
+            font-size: 1em;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        .prose .dresscode-themes li {
+            margin: 0.35em 0;
+        }
+        .prose .palette-intro {
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+        .prose .program-dj-note {
+            margin: 1em 0 0;
+            max-width: none;
+            text-align: left;
+            font-size: 1em;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        .prose .gallery-note {
+            margin: 1.5em 0 0;
+            max-width: none;
+            text-align: left;
+            font-size: 1em;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        .prose .map-wrap {
+            margin-bottom: 1em;
+        }
+        .gift-section.prose p.gift-bank-details {
+            text-align: center;
         }
 
         /* Fotka + panel „Kdy a kde“ (lehce průhledný) */
@@ -375,7 +449,7 @@
             width: 100%;
             max-width: 720px;
             padding: clamp(22px, 4vw, 34px) clamp(20px, 4vw, 36px);
-            background: rgba(250, 248, 255, 0.86);
+            background: rgba(250, 248, 255, 0.645);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--card-border);
@@ -395,12 +469,13 @@
         }
         .photo-band__facts {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 16px 20px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px 24px;
             margin: 0;
             padding: 0;
             text-align: center;
             font-family: 'Inter', sans-serif;
+            align-items: center;
         }
         .photo-band__fact {
             margin: 0;
@@ -410,25 +485,37 @@
             color: var(--heading);
         }
         @media (max-width: 600px) {
-            .photo-band__facts {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-            .photo-band__fact + .photo-band__fact {
-                margin-top: 14px;
-                padding-top: 14px;
-                border-top: 1px solid rgba(74, 143, 212, 0.2);
+            .photo-band {
+                margin: 28px 0;
             }
             .photo-band__overlay {
-                align-items: stretch;
+                /* Panel jen dole — fotka zůstane vidět nahoře i po stranách */
+                align-items: flex-end;
+                justify-content: center;
+                padding: 12px 14px 14px;
             }
             .photo-band__panel {
                 scroll-margin-top: 72px;
+                width: 100%;
                 max-width: none;
+                margin: 0;
+                padding: 14px 16px 16px;
+                background: rgba(250, 248, 255, 0.54);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                box-shadow: 0 8px 28px rgba(45, 65, 100, 0.14);
             }
             .photo-band__panel h2 {
-                font-size: 1.4em;
-                margin-bottom: 16px;
+                font-size: 1.35em;
+                margin: 0 0 12px;
+            }
+            .photo-band__facts {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .photo-band__fact {
+                font-size: 0.95rem;
+                line-height: 1.38;
             }
         }
         h2 {
@@ -461,59 +548,37 @@
             margin-bottom: 4px;
         }
 
-        /* Program Snake */
-        .program-snake {
-            margin-top: 20px;
-        }
-        .program-row {
+        /* Program — karty v jednom sloupci */
+        .program-list {
+            list-style: none;
+            margin: 1.25rem auto 0;
+            padding: 0;
+            max-width: 32em;
             display: flex;
-            align-items: center;
-            gap: 8px;
+            flex-direction: column;
+            gap: 12px;
         }
-        .program-row.reverse {
-            flex-direction: row-reverse;
-        }
-        .program-item {
-            flex: 1;
+        .program-list li {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.65rem 1rem;
             padding: 14px 16px;
             background: var(--accent-bg);
             border-radius: 12px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 1em;
+            line-height: 1.45;
+            font-weight: 300;
         }
-        .program-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px var(--card-shadow);
-        }
-        .program-icon {
-            font-size: 1.4em;
-            flex-shrink: 0;
-        }
-        .program-item strong {
-            display: block;
+        .program-time {
+            flex: 0 0 3.25rem;
+            font-variant-numeric: tabular-nums;
             color: var(--blue-deep);
             font-weight: 500;
-            font-size: 0.85em;
         }
-        .program-item span:not(.program-icon) {
-            font-size: 0.9em;
-        }
-        .program-arrow-h {
-            color: var(--purple);
-            font-size: 1.3em;
-            flex-shrink: 0;
-        }
-        .program-arrow-down {
-            display: flex;
-            justify-content: flex-end;
-            padding: 4px 24px;
-            color: var(--purple);
-            font-size: 1.3em;
-        }
-        .program-row.reverse + .program-arrow-down {
-            justify-content: flex-start;
+        .program-desc {
+            flex: 1 1 12rem;
+            min-width: 0;
         }
         .program-dj-note {
             margin: 26px auto 4px;
@@ -642,48 +707,20 @@
             font-weight: 500;
         }
 
-        /* Dress code */
-        .dresscode-hint {
-            text-align: center;
-            margin-top: 16px;
-            padding: 20px;
-            background: var(--accent-bg);
-            border-radius: 12px;
-            font-size: 0.95em;
-        }
+        /* Dress code — paleta (gradientový pás) */
         .color-palette {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
             margin-top: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(35, 45, 62, 0.22);
+            box-shadow: 0 2px 14px rgba(45, 65, 100, 0.12);
+            line-height: 0;
         }
-        .color-swatch {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        .color-swatch::after {
-            content: attr(data-name);
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.7em;
-            color: var(--text-light);
-            white-space: nowrap;
-        }
-
-        /* Kdy a kde — úvod nad mapou */
-        .venue-intro {
-            margin: 24px auto 18px;
-            max-width: 44em;
-            text-align: center;
-            font-size: 0.96em;
-            line-height: 1.82;
-            color: var(--text);
+        .color-palette img {
+            width: 100%;
+            display: block;
+            height: auto;
+            vertical-align: bottom;
         }
 
         /* Map */
@@ -863,9 +900,6 @@
             margin-bottom: 8px;
             font-weight: 400;
         }
-        .program-item-half {
-            flex: 0.5;
-        }
         .mhd-note {
             color: var(--text-light);
         }
@@ -1038,7 +1072,8 @@
                 font-size: 1.65em;
             }
             section.card {
-                padding: 28px 20px;
+                padding: 32px 16px;
+                border-radius: 12px;
             }
             h2 {
                 font-size: 1.4em;
@@ -1046,34 +1081,8 @@
             .info-grid {
                 grid-template-columns: 1fr;
             }
-            .program-item {
-                padding: 10px 12px;
-            }
-            .program-icon {
-                font-size: 1.2em;
-            }
-            .program-item strong {
-                font-size: 0.8em;
-            }
-            .program-item span:not(.program-icon) {
-                font-size: 0.8em;
-            }
-            .program-arrow-h {
-                font-size: 1em;
-            }
-            .program-arrow-down {
-                font-size: 1em;
-                padding: 2px 16px;
-            }
             .scroll-gallery-item img {
                 height: 240px;
-            }
-            .color-palette {
-                gap: 8px;
-            }
-            .color-swatch {
-                width: 38px;
-                height: 38px;
             }
             .witnesses {
                 gap: 32px;
@@ -1161,7 +1170,7 @@
         <div class="nav-links" id="nav-links">
             <a href="#o-nas">Proč</a>
             <a href="#datum">Kdy a kde</a>
-            <a href="#doprava">Doprava</a>
+            <a href="#obcerstveni">Jídlo</a>
             <a href="#program">Program</a>
             <a href="#dresscode">Dress code</a>
             <a href="#galerie">Fotky</a>
@@ -1175,7 +1184,7 @@
     </figure>
 
     <div class="container">
-        <section class="fade-in" id="o-nas">
+        <section class="fade-in prose" id="o-nas">
             <h2>Co je k tomu vedlo?</h2>
             <p>Barča a Tom se konečně budou brát! Však už jsou taky zasnoubení od 21.2.2021. Znají se ale už mnohem déle a celkově vznikl konsenzus, že spolu chodí od 20.3.2013. Svatba je tedy přesne po 13 letech a 3 měsících!</p>
             <p>Za ta léta jsme si toho spolu hodně prožili. Užíváme si společné zájmy, kterým vévodí cestování, hraní deskovek, koukání na filmy a seriály a v neposlední řadě pití piva (to se dá dělat u všech těch činností). Občas máme na věci opačný názor, ale 
@@ -1189,25 +1198,23 @@
                     <div class="photo-band__panel" id="datum">
                         <h2>Kdy a kde</h2>
                         <div class="photo-band__facts">
-                            <p class="photo-band__fact">20. června 2026</p>
+                            <p class="photo-band__fact photo-band__fact--datetime">20. června 2026 · 12:00</p>
                             <p class="photo-band__fact">Mendelův skleník<br>Mendlovo náměstí 1a, Brno</p>
-                            <p class="photo-band__fact">12:00</p>
                         </div>
                     </div>
                 </div>
             </div>
         </figure>
 
-        <section class="card fade-in">
-            <p class="venue-intro">Hledali jsme místo, které bude dobře dostupné pro všechny a kde se budeme cítit dobře. Máme rádi moderní architekturu a proto nás skleník oslovil jak svým umístěním, tak moderním provedením a rovněž historií, na kterou odkazuje. Na stejném místě měl totiž skleník pan Mendel a pěstoval v něm hrášky na své genetické experimenty.
-            </p>
+        <section class="fade-in prose">
+            <p>Hledali jsme místo, které bude dobře dostupné pro všechny a kde se budeme cítit dobře. Máme rádi moderní architekturu a proto nás skleník oslovil jak svým umístěním, tak moderním provedením a rovněž historií, na kterou odkazuje. Na stejném místě měl totiž skleník pan Mendel a pěstoval v něm hrášky na své genetické experimenty.</p>
             <div class="map-wrap">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d800!2d16.59345632421695!3d49.19106392269466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1scs!2scz!4v1" allowfullscreen loading="lazy"></iframe>
             </div>
-            <p class="venue-intro">Fun fact, skleník se postavil až po našem zasnoubení.</p>
+            <p>Fun fact, skleník se postavil až po našem zasnoubení.</p>
         </section>
 
-        <section class="card fade-in" id="doprava">
+        <section class="fade-in" id="doprava">
             <h2>Doprava a parkování</h2>
             <div class="info-grid">
                 <div class="info-item">
@@ -1222,70 +1229,66 @@
             </div>
         </section>
 
-        <section class="rsvp-section fade-in" id="rsvp">
+    </div>
+
+    <figure class="after-nav-photo fade-in">
+        <img src="images/3.jpg" alt="Barča a Tom u občerstvení" width="1024" height="682" decoding="async" loading="lazy">
+    </figure>
+
+    <div class="container">
+        <section class="fade-in prose" id="obcerstveni">
+            <h2>A co teda jíte!?</h2>
+            <p>Občerstvení bude zajištěno formou obědového a večerního rautu od naší oblíbené restaurace Vegalité. Můžete se taky těšit na dort, sweet bar, dobré pití a další dobrůtky. Konkrétní položky cateringu ještě ladíme, s jejich výběrem nám prosím pomožte vyplněním formuláře níže. Děkujeme za spolupráci.</p>
+        </section>
+
+        <section class="card rsvp-section fade-in" id="rsvp">
             <h2>Ano, i my máme formulář, nuda co?</h2>
             <p>Prosíme o vyplnění formuláře a potvrzení účasti do 20. května 2026.</p>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSflb5icu_Z6nXJI2GXvZn0-Oqd2Jh8Aiblpslhy0Rw4f0qZ-w/viewform?usp=dialog" target="_blank" class="rsvp-btn">Vyplnit formulář</a>
         </section>
 
-        <section class="card fade-in" id="program">
+        <section class="fade-in prose" id="program">
             <h2>Program</h2>
-            <p class="venue-intro">Změna, samozřejmě, vyhrazena :))</p>
-            <div class="program-snake">
-                <div class="program-row">
-                    <div class="program-item"><span class="program-icon">👋</span><div><strong>11:00</strong><span>Příjezd hostů</span></div></div>
-                    <span class="program-arrow-h">→</span>
-                    <div class="program-item"><span class="program-icon">💍</span><div><strong>12:00</strong><span>Obřad</span></div></div>
-                </div>
-                <div class="program-arrow-down">↓</div>
-                <div class="program-row reverse">
-                    <div class="program-item"><span class="program-icon">🍽️</span><div><strong>13:00</strong><span>Oběd</span></div></div>
-                    <span class="program-arrow-h">→</span>
-                    <div class="program-item"><span class="program-icon">💃</span><div><strong>14:00</strong><span>První tanec</span></div></div>
-                </div>
-                <div class="program-arrow-down">↓</div>
-                <div class="program-row">
-                    <div class="program-item"><span class="program-icon">🎂</span><div><strong>14:45</strong><span>Krájení dortu</span></div></div>
-                    <span class="program-arrow-h">→</span>
-                    <div class="program-item"><span class="program-icon">🎲</span><div><strong>16:00</strong><span>Svatební hry</span></div></div>
-                </div>
-                <div class="program-arrow-down">↓</div>
-                <div class="program-row reverse">
-                    <div class="program-item"><span class="program-icon">🍷</span><div><strong>19:00</strong><span>Večerní raut</span></div></div>
-                    <span class="program-arrow-h">→</span>
-                    <div class="program-item"><span class="program-icon">🎲</span><div><strong>20:00</strong><span>Svatební hry</span></div></div>
-                </div>
-                <div class="program-arrow-down">↓</div>
-                <div class="program-row">
-                    <div class="program-item"><span class="program-icon">🪩</span><div><strong>21:00</strong><span>Paaarty</span></div></div>
-                    <span class="program-arrow-h">→</span>
-                    <div class="program-item"><span class="program-icon">✨</span><div><strong>23:00</strong><span>Překvápko</span></div></div>
-                </div>
-                <div class="program-arrow-down">↓</div>
-                <div class="program-row reverse">
-                    <div class="program-item program-item-half"><span class="program-icon">🌙</span><div><strong>02:00</strong><span>Konec?</span></div></div>
-                </div>
-            </div>
+            <p>Změna, samozřejmě, vyhrazena :))</p>
+            <ul class="program-list">
+                <li><span class="program-time">11:00</span> <span class="program-desc">Příjezd hostů</span></li>
+                <li><span class="program-time">12:00</span> <span class="program-desc">Svatební obřad</span></li>
+                <li><span class="program-time">13:00</span> <span class="program-desc">Oběd</span></li>
+                <li><span class="program-time">14:00</span> <span class="program-desc">Svatební hry, první tanec</span></li>
+                <li><span class="program-time">15:00</span> <span class="program-desc">Krájení dortu, sweet bar, studený bufet</span></li>
+                <li><span class="program-time">19:00</span> <span class="program-desc">Večerní raut</span></li>
+                <li><span class="program-time">20:00</span> <span class="program-desc">Svatební hry</span></li>
+                <li><span class="program-time">21:00</span> <span class="program-desc">Večerní tanec</span></li>
+                <li><span class="program-time">21:30</span> <span class="program-desc">Party like it's 1999</span></li>
+            </ul>
             <p class="program-dj-note">DJ bude Spotify, takže nám prosím nahlašte vaše oblíbené bangery <img src="images/monka-party.webp" alt="" class="dj-emote-inline" width="28" height="27" loading="lazy" decoding="async"></p>
         </section>
 
-        <section class="card fade-in" id="dresscode">
+    </div>
+
+    <figure class="after-nav-photo fade-in">
+        <img src="images/4.jpg" alt="Barča a Tom při tanci" width="1024" height="682" decoding="async" loading="lazy">
+    </figure>
+
+    <div class="container">
+        <section class="fade-in prose" id="dresscode">
             <h2>Dress code</h2>
-            <p class="text-center">Oblečte se slavnostně podle vašich možností.</p>
-            <div class="dresscode-hint">
-                <strong>Tip:</strong> Pánové oblek, sako, nebo aspoň košile, dámy šaty nebo elegantní kombinace. Boty hlavně pohodlné. Ne nutně nejspolečenštější. Ponožky v sandálech už jsou extrém.
+            <p>Vezměte si něco svátečního, v čem se budete cítit dobře a pohodlně.</p>
+            <p>Jestli se chcete podílet na barevném a tématickém ladění naší události, nejvíce vítáme:</p>
+            <ul class="dresscode-themes">
+                <li>odstíny modré</li>
+                <li>sladké pastelové barvy</li>
+                <li>geometrické, futuristické nebo vesmírné detaily</li>
+            </ul>
+            <p>Dámy, prosím vynechte na svém oblečení bílou.</p>
+            <p>Bude se tančit, ale také možná chodit po trávě, takže obuv volte pohodlnou, nebo si klidně vezměte s sebou něco na přezutí do divokých večerních hodin.</p>
             <p class="palette-intro">Naše barevná paleta pro inspiraci:</p>
             <div class="color-palette">
-                <div class="color-swatch" style="background:#94b8e0;" data-name="modrá"></div>
-                <div class="color-swatch" style="background:#b0a0d4;" data-name="fialová"></div>
-                <div class="color-swatch" style="background:#e4b3c8;" data-name="růžová"></div>
-                <div class="color-swatch" style="background:#a8dcd1;" data-name="mint"></div>
-                <div class="color-swatch" style="background:#f0b8a8;" data-name="lososová"></div>
-                <div class="color-swatch" style="background:#c8b8e8;" data-name="levandule"></div>
+                <img src="images/dresscode-palette.png" alt="Barevná paleta: od tmavě modré přes modrou, levanduli a fialovou k růžové a světle růžové" width="1024" height="186" loading="lazy" decoding="async">
             </div>
         </section>
 
-        <section class="card fade-in" id="galerie">
+        <section class="fade-in prose" id="galerie">
             <h2>Jak jdeme časem</h2>
             <div class="scroll-gallery-wrap">
             <button class="gallery-nav left" id="gallery-prev">&#8249;</button>
@@ -1317,7 +1320,7 @@
             <p class="gallery-note">Pokud nás máte taky zachyceny, jak jdem časem, a máte byť jen malou pochybnost, že ty fotky nemáme, prosíme, abyste nám je poskytli.</p>
         </section>
 
-        <section class="card fade-in" id="svedci">
+        <section class="fade-in" id="svedci">
             <h2>Svědci</h2>
             <div class="witnesses">
                 <div class="witness">
@@ -1335,7 +1338,7 @@
             </div>
         </section>
 
-        <section class="card fade-in gift-section" id="dary">
+        <section class="fade-in prose gift-section" id="dary">
             <h2>Dary</h2>
             <p>Pokud nás budete chtít obdarovat, opravdu platí, že Vaše účast na našem dni je ten nejlepší dar. Druhý nejlepší určitě bude převod na účet, který bude použit na naše oblíbené cestování po světě.</p>
             <div class="qr-wrap">
