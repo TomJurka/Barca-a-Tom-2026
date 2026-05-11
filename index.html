@@ -471,20 +471,12 @@
             border-radius: 12px;
         }
         .prose .spirit-photo figcaption {
-            margin-top: 0.75em;
-            font-size: 0.95em;
-            line-height: 1.6;
-            color: var(--text);
-            font-style: italic;
-        }
-        .prose .spirit-photo figcaption .spirit-photo__source {
-            display: block;
-            margin-top: 0.25em;
-            font-size: 0.85em;
-            font-style: normal;
+            margin-top: 0.6em;
+            font-size: 0.75em;
+            line-height: 1.5;
             color: var(--text-light);
         }
-        .prose .spirit-photo figcaption .spirit-photo__source a {
+        .prose .spirit-photo figcaption a {
             color: inherit;
         }
 
@@ -1196,6 +1188,18 @@
                 margin-left: 0;
                 margin-right: 0;
             }
+            /* Fotka „Kdy a kde“ a „spirit animals“ — na mobilu také od kraje ke kraji */
+            .container > .photo-band,
+            .container > section .spirit-photo {
+                margin-left: -24px;
+                margin-right: -24px;
+            }
+            .container > section .spirit-photo img {
+                border-radius: 0;
+            }
+            .container > section .spirit-photo figcaption {
+                padding: 0 24px;
+            }
             section {
                 margin: 26px 0;
             }
@@ -1270,7 +1274,7 @@
             <h2>Co je k tomu vedlo?</h2>
             <p>
                 Barča a Tom se konečně budou brát! Zasnoubeni jsou od 21.2.2021, tedy vskutku ne krátce.
-                Znají se však vskutku ještě mnohem déle a po počátečních diskuzích vznikl konsenzus, že spolu jsou od 20.3.2013.
+                Znají se však ještě mnohem déle a po počátečních diskuzích vznikl konsenzus, že spolu jsou od 20.3.2013.
                 Svatba bude tedy přesně po 13 letech a 3 měsících!
             </p>
             <p>
@@ -1283,10 +1287,7 @@
             </p>
             <figure class="spirit-photo">
                 <img src="images/vydry.png" alt="Dvě vydry v trávě pod kvetoucími sakurami" decoding="async" loading="lazy">
-                <figcaption>
-                    Vydry jsou naše spirit animals.
-                    <span class="spirit-photo__source">Zdroj: <a href="https://www.instagram.com/otter_kotaro_hana/" target="_blank" rel="noopener noreferrer">instagram.com/otter_kotaro_hana</a></span>
-                </figcaption>
+                <figcaption>Zdroj: <a href="https://www.instagram.com/otter_kotaro_hana/" target="_blank" rel="noopener noreferrer">instagram.com/otter_kotaro_hana</a></figcaption>
             </figure>
         </section>
 
