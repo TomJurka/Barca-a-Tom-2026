@@ -459,6 +459,35 @@
             text-align: center;
         }
 
+        /* Fotka „spirit animals“ uvnitř prose sekce */
+        .prose .spirit-photo {
+            margin: 1.5em 0 0;
+            text-align: center;
+        }
+        .prose .spirit-photo img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+        .prose .spirit-photo figcaption {
+            margin-top: 0.75em;
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: var(--text);
+            font-style: italic;
+        }
+        .prose .spirit-photo figcaption .spirit-photo__source {
+            display: block;
+            margin-top: 0.25em;
+            font-size: 0.85em;
+            font-style: normal;
+            color: var(--text-light);
+        }
+        .prose .spirit-photo figcaption .spirit-photo__source a {
+            color: inherit;
+        }
+
         /* Fotka + panel „Kdy a kde“ (lehce průhledný) */
         .photo-band {
             margin: 40px 0;
@@ -1252,6 +1281,13 @@
             <p>
                 A teď bychom si rádi před našimi nejbližími slíbili, že v tom budeme pokračovat.
             </p>
+            <figure class="spirit-photo">
+                <img src="images/vydry.png" alt="Dvě vydry v trávě pod kvetoucími sakurami" decoding="async" loading="lazy">
+                <figcaption>
+                    Vydry jsou naše spirit animals.
+                    <span class="spirit-photo__source">Zdroj: <a href="https://www.instagram.com/otter_kotaro_hana/" target="_blank" rel="noopener noreferrer">instagram.com/otter_kotaro_hana</a></span>
+                </figcaption>
+            </figure>
         </section>
 
         <figure class="photo-band fade-in">
